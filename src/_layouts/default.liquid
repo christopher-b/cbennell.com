@@ -4,7 +4,7 @@
     {% render "head", metadata: site.metadata, title: data.title %}
   </head>
   <body class="{{ data.layout }} {{ data.page_class }}">
-    {% render "navbar", metadata: site.metadata, resource: resource %}
+    {% render "header", metadata: site.metadata %}
 
     <main>
       {{ content }}

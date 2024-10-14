@@ -1,9 +1,9 @@
 ---
 title: "Running WordPress Multisite on Hetzner with Custom Domains"
 date: "2024-10-02"
-categories: 
+categories:
   - "wordpress"
-tags: 
+tags:
   - "diy"
   - "hetzner"
 coverImage: "swans.jpeg"
@@ -42,7 +42,7 @@ Bash
 ```
 apt update
 apt upgrade
-apt autoremove 
+apt autoremove
 reboot
 ```
 

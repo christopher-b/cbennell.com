@@ -2,6 +2,17 @@
 layout: default
 ---
 
-<h1>{{ data.title }}</h1>
+<article>
+  <header>
+    <img src="{{ '/images/featured/' | append: resource.data.coverImage | relative_url }}" alt="" role="presentation" />
+    <h1>{{ data.title }}</h1>
+    <time datetime="{{resource.data.date}}">{{resource.data.date | date: "%B %d, %Y" }}</time>
+    <p>
+    {% for tag in resource.data.tags %}
+      <a href="" rel="tag">{{tag}}</a>
+    {% endfor %}
+    </p>
+  </header>
 
-{{ content }}
+  {{ content }}
+</article>
