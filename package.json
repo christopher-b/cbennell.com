@@ -7,6 +7,7 @@
     "esbuild-dev": "node esbuild.config.js --watch"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.15",
     "esbuild": "^0.19.2",
     "glob": "^10.3.3",
     "postcss": "^8.4.29",
@@ -14,6 +15,7 @@
     "postcss-import": "^15.1.0",
     "postcss-load-config": "^4.0.1",
     "postcss-preset-env": "^9.1.2",
-    "read-cache": "^1.0.0"
+    "read-cache": "^1.0.0",
+    "tailwindcss": "^3.4.14"
   }
 }

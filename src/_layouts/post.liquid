@@ -2,17 +2,36 @@
 layout: default
 ---
 
-<article>
-  <header>
-    <img src="{{ '/images/featured/' | append: resource.data.coverImage | relative_url }}" alt="" role="presentation" />
-    <h1>{{ data.title }}</h1>
-    <time datetime="{{resource.data.date}}">{{resource.data.date | date: "%B %d, %Y" }}</time>
-    <p>
-    {% for tag in resource.data.tags %}
-      <a href="" rel="tag">{{tag}}</a>
-    {% endfor %}
-    </p>
-  </header>
+<!--Display a single Post resource-->
+<article class="bg-grenadier-50">
+  <div class="container max-w-screen-lg py-4">
+    <header class="mb-6">
+      <!--Cover image-->
+      <img class="rounded-xl w-full max-w-2xl mx-auto my-14" src="{{ '/images/featured/' | append: resource.data.coverImage | relative_url }}" alt="" role="presentation" />
 
-  {{ content }}
+      <!--Headline-->
+      <h2 class="text-4xl font-medium text-center my-6">{{ data.title }}</h1>
+
+      <!--Publish date-->
+      <p class="text-center">
+        <time class="text-grenadier-700" datetime="{{resource.data.date}}">
+          {{resource.data.date | date: "%B %d, %Y" }}
+        </time>
+      </p>
+
+      <!--Tags-->
+      <ul class="flex justify-center space-x-3 py-6">
+        {% for tag in resource.data.tags %}
+          <li class="rounded-md bg-grenadier-200 px-2 py-1 text-zinc-700">
+            <a href="" rel="tag">{{tag}}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </header>
+
+    <!--Post content-->
+    <div class="prose prose-zinc prose-lg max-w-screen-lg md:mx-auto">
+      {{ content }}
+    </div>
+  </div>
 </article>

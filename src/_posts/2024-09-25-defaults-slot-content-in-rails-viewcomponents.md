@@ -1,24 +1,25 @@
 ---
 title: "Default, Dynamic Slot Content in Rails ViewComponents"
 date: "2024-09-25"
-categories: 
+categories:
   - "dev"
-tags: 
+tags:
   - "ruby-on-rails"
   - "viewcomponent"
 coverImage: "AdobeStock_308250313-scaled-1.jpeg"
 ---
 
-Have you ever wanted to have a default value for a [ViewComponent slot](https://viewcomponent.org/guide/slots.html), or to make the default value dynamic? I have an "alert" component which usually renders an icon based on the alert variant (sucess, error, warning, etc.) I recently had a requirement to conditionally render a different icon (in this case, a spinner) independent of the alert variant. The solution I came up with was to use the [polymorphic slots](https://viewcomponent.org/guide/slots.html#polymorphic-slots), along with a `before_render?` check to see if an icon has been declared for that slot.
+Have you ever wanted to have a default value for a [ViewComponent slot](https://viewcomponent.org/guide/slots.html), or to make the default value dynamic?
+{: .lead }
+
+I have an "alert" component which usually renders an icon based on the alert variant (sucess, error, warning, etc.) I recently had a requirement to conditionally render a different icon (in this case, a spinner) independent of the alert variant. The solution I came up with was to use the [polymorphic slots](https://viewcomponent.org/guide/slots.html#polymorphic-slots), along with a `before_render?` check to see if an icon has been declared for that slot.
 
 This solution made rendering a spinner icon very concise; I don't need to include the entire instantiation of the `Ui::Spinner` component.
 
 Here's the component template.
 
-app/components/ui/alert.html.erb
-
-```
-<div class="alert alert-<%= @type %>" role="alert">
+{% code erb caption=app/components/ui/alert.html.erb %}
+<div class="alert alrt-<%= @type %>" role="alert">
   <span class="alert-icon">
     <%= icon %>
   </span>
@@ -27,7 +28,7 @@ app/components/ui/alert.html.erb
     <%= content %>
   </div>
 </div>
-```
+{% endcode %}
 
 And the component class. If the icon slot has not been explicitly filled, we set it to a dynamic default.
 

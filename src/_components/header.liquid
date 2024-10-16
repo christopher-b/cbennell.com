@@ -1,11 +1,18 @@
-<header>
-  <h1>
-    <a href="/" rel="home">
-      <img src="{{ '/images/portrait.jpg' | relative_url }}" alt="Portrait of Christopher" />
-      Christopher Bennell
+<header class="bg-zinc-900 text-neutral-100 py-8">
+  <div class="container max-w-screen-lg">
+    <a class="flex flex-col md:flex-row items-center pb-8" href="/" rel="home">
+      <img
+        class="rounded-full w-32 border border-zinc-500"
+        src="{{ '/images/portrait.jpg' | relative_url }}"
+        alt="Portrait of Christopher"
+      />
+      <h1 class="text-4xl md:ps-4">
+        Christopher Bennell
+      </h1>
     </a>
-  </h1>
-  <p>
-  I’m a full-stack web developer specializing in Ruby on Rails and Education Technology. <a href="mailto:cbennell@hey.com">Let’s connect</a>.
-  </p>
+    <p class="text-center md:text-left">
+      I’m a full-stack web developer specializing in Ruby on Rails and Education Technology.
+      <a class="underline" href="mailto:cbennell@hey.com">Get in touch</a>.
+    </p>
+  </div>
 </header>
