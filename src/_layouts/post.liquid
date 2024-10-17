@@ -4,10 +4,10 @@ layout: default
 
 <!--Display a single Post resource-->
 <article class="bg-grenadier-50">
-  <div class="container max-w-screen-lg py-4">
+  <div class="container max-w-screen-lg pb-8 pt-8">
     <header class="mb-6">
       <!--Cover image-->
-      <img class="rounded-xl w-full max-w-2xl mx-auto my-14" src="{{ '/images/featured/' | append: resource.data.coverImage | relative_url }}" alt="" role="presentation" />
+      <img class="rounded-xl w-full max-w-2xl mx-auto mb-12" src="{{ '/images/featured/' | append: resource.data.coverImage | relative_url }}" alt="" role="presentation" />
 
       <!--Headline-->
       <h2 class="text-4xl font-medium text-center my-6">{{ data.title }}</h1>
@@ -23,7 +23,7 @@ layout: default
       <ul class="flex justify-center space-x-3 py-6">
         {% for tag in resource.data.tags %}
           <li class="rounded-md bg-grenadier-200 px-2 py-1 text-zinc-700">
-            <a href="" rel="tag">{{tag}}</a>
+            <a href="/tags/{{ tag }}" rel="tag">{{tag}}</a>
           </li>
         {% endfor %}
       </ul>
