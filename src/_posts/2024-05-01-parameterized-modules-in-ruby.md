@@ -1,21 +1,19 @@
 ---
-title: "Parameterized Modules in Ruby"
-date: "2024-05-01"
-categories: 
-  - "ruby"
-tags: 
-  - "ruby"
-coverImage: "AdobeStock_715534757-scaled-1.jpeg"
+title: Parameterized Modules in Ruby
+date: 2024-05-01
+tags:
+  - ruby
+coverImage: squares.jpeg
 ---
 
 Reading the documentation for some [dry-rb](https://dry-rb.org/) projects, like [dry-](https://dry-rb.org/gems/dry-container/0.11/)[auto\_inject](https://dry-rb.org/gems/dry-auto_inject/1.0/), I was intrigued by the syntax in examples like this:
 
-```
+{% code ruby %}
 class CreateUser
   include Import["users_repository"]
   ...
 end
-```
+{% endcode %}
 
 What is this usage of square brackets in the included module? Is this some arcane syntax I've never seen before? How can I replicate this in my own code?
 
@@ -23,7 +21,7 @@ It's actually nothing too magical. Include isn't a keyword, it's a method (defin
 
 We also know that we can define a method named `[]` (as class or instance methods) to give that object "array access" syntax.
 
-```
+{% code ruby %}
 class List
   def [](index)
     items = [:zero, :one, :two]
@@ -33,11 +31,11 @@ end
 
 list = List.new
 puts list[1] # :one
-```
+{% endcode %}
 
 Same for class methods.
 
-```
+{% code ruby %}
 class List
   def self.[](index)
     items = [:zero, :one, :two]
@@ -46,13 +44,13 @@ class List
 end
 
 puts List[2] # :two
-```
+{% endcode %}
 
 If this `[]` method returns a module, we can supply that return value to our `include` call.
 
 Let's implement the `[]` method on our module.
 
-```
+{% code ruby %}
 module ParameterizedModule
   def self.[](item)
     puts "It works"
@@ -63,7 +61,7 @@ end
 class Test
   include ParameterizedModule["test"]
 end
-```
+{% endcode %}
 
 We define `[]` on the module itself so we can call it as we would a class method. We return `self` because `include` is expecting a `Module`.
 
@@ -71,7 +69,7 @@ Now comes the tricky part. How can we use the supplied parameter to customize th
 
 The trick is to use `define_method` to add an instance method to the module. `define_method` captures the lexical scope, so the parameters are available within the method you're defining.
 
-```
+{% code ruby %}
 module ParameterizedModule
   def self.[](item)
     define_method :item_parameter do
@@ -91,13 +89,13 @@ class Test
 end
 
 puts Test.new.get_item # "test"
-```
+{% endcode %}
 
 This approach does add an extra method (`item_parameter`) to the client class, which is not ideal, as we're slightly polluting that class' namespace; I prefer to keep the module's interface as small as possible. But this is an OK trade-off in my opinion. Just make sure to name your method appropriately to avoid a collision.
 
 We could also choose to just dynamically define the methods that reference the parameter themselves.
 
-```
+{% code ruby %}
 module ParameterizedModule
   def self.[](item)
     define_method :get_item do
@@ -113,7 +111,7 @@ class Test
 end
 
 puts Test.new.get_item # test
-```
+{% endcode %}
 
 But this comes with its own problem. I can imagine myself doing a global search for "def get\_item" to find where this method is defined; this approach breaks that ability. I prefer to have my important methods look like methods. The `item_parameter` method in the previous example is more like plumbing, so we can get away with it there.
 
@@ -121,7 +119,7 @@ But this comes with its own problem. I can imagine myself doing a global search 
 
 Using the array access syntax implies that we are accessing an item from a collection. That is the convention associated with the syntax, and this is what's happening in the example from dry-auto\_inject. If we want to keep the semantics of a regular method call wherein we are supplying a parameter that doesn't imply an item in a list, we can just rename the method:
 
-```
+{% code ruby %}
 module ParameterizedModule
   def self.with_item(item)
     define_method :get_item do
@@ -137,20 +135,20 @@ class Test
 end
 
 puts Test.new.get_item
-```
+{% endcode %}
 
 This makes it a bit more obvious what we are actually doing.
 
 There are other situations in the dry-rb documentation where it seems to just use the array access as a shortcut for a "default" method, to avoid needing to call a specific method on a class. From [dry-types:](https://dry-rb.org/gems/dry-types/1.7/)
 
-```
+{% code ruby %}
 Types::Strict::String["foo"]
 # => "foo"
-```
+{% endcode %}
 
-There are a few similar example in the official Ruby [docs for `Data`](https://docs.ruby-lang.org/en/master/Data.html)`.`
+There are a few similar example in the official Ruby [docs for `Data`](https://docs.ruby-lang.org/en/master/Data.html).
 
-```
+{% code ruby %}
 # https://docs.ruby-lang.org/en/master/Data.html
 Measure = Data.define(:amount, :unit)
 
@@ -164,7 +162,7 @@ speed = Measure[10, 'mPh']
 
 # https://ruby-doc.org/stdlib-3.0.2/libdoc/set/rdoc/Set.html#class-Set-label-Example
 s1 = Set[1, 2] #=> #<Set: {1, 2}>
-```
+{% endcode %}
 
 It seems to have become a convention for calling a _default_ method on a class, much like `.call`. I _want_ to like this approach, because it's clean and concise, but I think it's abusing the semantics of the array access syntax.
 
@@ -172,7 +170,7 @@ It seems to have become a convention for calling a _default_ method on a class, 
 
 One way I'm planning to use this in my own code is to supply a list of plugins when `includ`ing my Authentication module in my Rails `ApplicationController` (I may expand on this in a future post).
 
-```
+{% code ruby %}
 class ApplicationController < ActionController::Base
   include Authentication[
     Authentication::LTIPlugin.new,
@@ -181,7 +179,7 @@ class ApplicationController < ActionController::Base
   ]
   before_action :require_login
   ...
-```
+{% endcode %}
 
 ## Conclusion
 

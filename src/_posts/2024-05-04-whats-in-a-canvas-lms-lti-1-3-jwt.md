@@ -1,15 +1,13 @@
 ---
-title: "What's in a Canvas LMS LTI 1.3 JWT?"
-date: "2024-05-04"
-categories: 
-  - "edtech"
-tags: 
-  - "edtech"
-  - "lti"
-coverImage: "AdobeStock_742935377-scaled-1.jpeg"
+title: What's in a Canvas LMS LTI 1.3 JWT?
+date: 2024-05-04
+tags:
+  - edtech
+  - lti
+coverImage: blue_paint.jpeg
 ---
 
-As a precursor to more in-depth articles about handling LTI 1.3 launches ([here](https://cbennell.ocaduwebspace.ca/18/handling-lti-launches-in-rails/) and [here](https://cbennell.ocaduwebspace.ca/78/building-an-lti-deeplinking-response-in-rails/)) in Ruby on Rails, I wanted to explore the contents of an LTI JWT. Receiving and decoding the JWT is part of step three of the four-step process of handling an LTI launch. My [other article](https://cbennell.ocaduwebspace.ca/18/handling-lti-launches-in-rails/) will cover those steps in more detail, but I will point out that most of the work is being done by the [json-jwt](https://github.com/nov/json-jwt) gem.
+As a precursor to more in-depth articles about handling LTI 1.3 launches ([here]({{ "posts/handling-lti-launches-in-rails/" | relative_url }}) and [here]({{ "posts/building-an-lti-deeplinking-response-in-rails/" | relative_url }})) in Ruby on Rails, I wanted to explore the contents of an LTI JWT. Receiving and decoding the JWT is part of step three of the four-step process of handling an LTI launch. My [other article]({{ "posts/handling-lti-launches-in-rails/" | relative_url }}) will cover those steps in more detail, but I will point out that most of the work is being done by the [json-jwt](https://github.com/nov/json-jwt) gem.
 
 A JSON Web Token is a chunk of JSON that has been **signed** and **encrypted**. **Signed** means that we can trust the token content, and **encrypted** means that no one else can read it. JWTs allow applications to securely pass around data, structured as JSON objects. The [LTI Security Framework](https://www.imsglobal.org/spec/security/v1p0/#authentication-response-validation) specifies using OIDC + JWTs as one possible pattern for secure communication.
 
@@ -17,7 +15,7 @@ The examples I'm using here are from Canvas LMS, with a request configured to ex
 
 Canvas LMS JWT Example
 
-```
+{% code %}
 {
   "https://purl.imsglobal.org/spec/lti/claim/message_type"=>"LtiDeepLinkingRequest",
   "https://purl.imsglobal.org/spec/lti/claim/version"=>"1.3.0",
@@ -31,9 +29,9 @@ Canvas LMS JWT Example
     "nonce"=>"...",
     "sub"=>"...",
     ...and so on
-  }    
+  }
 }
-```
+{% endcode %}
 
 At a high level, the JWT contains a few different types of information:
 
@@ -122,7 +120,7 @@ A representation of the user making the request. Canvas asks us to use the [Name
 ### deployment\_id
 
 ```
-"https://purl.imsglobal.org/spec/lti/claim/deployment_id": "409:ae84...806"  
+"https://purl.imsglobal.org/spec/lti/claim/deployment_id": "409:ae84...806"
 ```
 
 This is the an ID for the unique placement of this tool launch. Each instance of this tool placement will have a unique ID.
@@ -146,7 +144,7 @@ Which version of the LTI protocol we're working with.
 ### target\_link\_uri
 
 ```
-"https://purl.imsglobal.org/spec/lti/claim/target_link_uri": "https://your.tool/path", 
+"https://purl.imsglobal.org/spec/lti/claim/target_link_uri": "https://your.tool/path",
 ```
 
 This value is configured on your Developer Key, in the "Target Link URI" field.
@@ -157,13 +155,13 @@ This hash contains details of the course or similar context from which the tool 
 
 ```
 "https://purl.imsglobal.org/spec/lti/claim/context": {
-  "id": "62499430cba135337460ba1a02e5a3fbfce45ed5", 
-  "label": "Art History 101", 
+  "id": "62499430cba135337460ba1a02e5a3fbfce45ed5",
+  "label": "Art History 101",
   "title": "ABCD-1234-101 (Spring/Summer 2024) Art History 101",
   "type": [
     "http://purl.imsglobal.org/vocab/lis/v2/course#CourseOffering"
   ]
-}, 
+},
 ```
 
 We also have a definition of the "type" of context that launched the tool. Perusing the [LTI docs](https://www.imsglobal.org/spec/lti/v1p3/#context-type-vocabulary), it would appear that the most likely values here are course#CourseTemplate, course#CourseOffering, course#CourseSection or course#Group (however, the docs list these all as deprecated?).
@@ -176,8 +174,8 @@ Details about how to content will be displayed, including the dimensions of type
 
 ```
 "https://purl.imsglobal.org/spec/lti/claim/launch_presentation": {
-  "document_target": "iframe", 
-  "return_url": "https://lms.com/courses/1234/external_content/success/external_tool_dialog", 
+  "document_target": "iframe",
+  "return_url": "https://lms.com/courses/1234/external_content/success/external_tool_dialog",
   "height": 800,
   "width": 1000,
 },
@@ -232,7 +230,7 @@ Likewise, the `lti1p1` claim includes the `legacy_user_id`, along with the tool'
 In your Developer Key config, you can request [custom fields](https://canvas.instructure.com/doc/api/file.tools_variable_substitutions.html) be included in the response. This is the easiest way to get Canvas to pass along contextual SIS IDs, which allows you to skip the "Names and Roles" API. There are many fields you can include, it's worth taking a look to discover ways to enhance your tool.
 
 ```
-# Developer Key Config: 
+# Developer Key Config:
 user_sis_id=$Canvas.user.sisSourceId
 course_sis_id=$Canvas.course.sisSourceId
 
@@ -249,12 +247,12 @@ course_sis_id=$Canvas.course.sisSourceId
 
 ```
 "https://purl.imsglobal.org/spec/lti-dl/claim/deep_linking_settings": {
-  "deep_link_return_url": "https://your.tool./courses/1234/deep_linking_response?data=eyJ0...igU", 
-  "accept_types": ["link", "file", "html", "ltiResourceLink", "image"], 
-  "accept_presentation_document_targets": ["embed", "iframe", "window"], 
-  "accept_media_types": "image/*,text/html,application/vnd.ims.lti.v1.ltilink,*/*", 
-  "auto_create": false, 
-  "accept_multiple": true, 
+  "deep_link_return_url": "https://your.tool./courses/1234/deep_linking_response?data=eyJ0...igU",
+  "accept_types": ["link", "file", "html", "ltiResourceLink", "image"],
+  "accept_presentation_document_targets": ["embed", "iframe", "window"],
+  "accept_media_types": "image/*,text/html,application/vnd.ims.lti.v1.ltilink,*/*",
+  "auto_create": false,
+  "accept_multiple": true,
 }
 ```
 

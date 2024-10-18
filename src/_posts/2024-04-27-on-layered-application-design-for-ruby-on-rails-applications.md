@@ -1,13 +1,12 @@
 ---
-title: "On \"Layered Design for Ruby on Rails Applications\""
-date: "2024-04-27"
-categories: 
-  - "reviews"
-tags: 
-  - "application-design"
-  - "books"
-  - "ruby-on-rails"
-coverImage: "AdobeStock_232244890-scaled-1.jpeg"
+title: On "Layered Design for Ruby on Rails Applications"
+date: 2024-04-27
+tags:
+  - reviews
+  - application-design
+  - books
+  - ruby-on-rails
+coverImage: contours.jpeg
 ---
 
 _[Layered Design for Ruby on Rails Applications](https://www.packtpub.com/product/layered-design-for-ruby-on-rails-applications/9781801813785)_ (By Vladimir Dementyev, published by Packt August 2023) discusses advanced topics in Ruby on Rails application design. The core of the book, as can be gathered from the title, is the concept of _layers_. Dementyev actually uses _layer_ in two different ways:
@@ -17,11 +16,8 @@ _[Layered Design for Ruby on Rails Applications](https://www.packtpub.com/produc
 Architectural layers are high-level categories for application components. The application layers discussed in the book are borrowed from [Domain-Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design) concepts:
 
 - **Presentation**: Rendering the UI and handling user input.
-
 - **Application**: Applying structure to other domain objects to handle requests or commands.
-
 - **Domain**: Business logic and application state.
-
 - **Infrastructure**: Interacting with external services and resources.
 
 Concepts from DDD are explained, like the principle that low-level layers should not depend on higher levels, and implementation details shouldn't leak between layers. For example, a domain object shouldn't contain code that is specific to the presentation layer.
