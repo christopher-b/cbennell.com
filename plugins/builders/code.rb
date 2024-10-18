@@ -1,37 +1,33 @@
 class Builders::Code < SiteBuilder
-  attr_reader :options, :tag
-
   def build
     liquid_tag :code, as_block: true do |option_string, tag|
-      @options = parse_options(option_string)
-      @tag = tag
+      options = parse_options(option_string)
 
+      formatter = build_formatter(options)
+      lexer = build_lexer(options)
+      content = parse_content(tag)
+
+      tokens = lexer.lex(content)
       formatter.format(tokens)
     end
   end
 
-  def formatter
-    @formatter ||= begin
-      formatter = Rouge::Formatters::HTML.new
-      formatter = Rouge::Formatters::HTMLLineHighlighter.new(formatter, highlight_lines: options[:lines]&.map(&:to_i))
-      formatter = ChompFormatter.new(formatter)
-      formatter = Rouge::Formatters::HTMLTable.new(formatter, gutter_class: "gutter", code_class: "code")
-      formatter = WrappingFormatter.new(formatter, caption: options[:caption])
-      formatter
-    end
+  def build_formatter(options)
+    formatter = Rouge::Formatters::HTML.new
+    formatter = Rouge::Formatters::HTMLLineHighlighter.new(formatter, highlight_lines: options[:lines]&.map(&:to_i))
+    formatter = ChompFormatter.new(formatter)
+    formatter = Rouge::Formatters::HTMLTable.new(formatter, gutter_class: "gutter", code_class: "code")
+    formatter = WrappingFormatter.new(formatter, caption: options[:caption])
+    formatter
   end
 
-  def tokens
-    @tokens ||= lexer.lex(content)
-  end
-
-  def lexer
+  def build_lexer(options)
     lang = options[:lang]
-    @lexer ||= Rouge::Lexer.find_fancy(lang) || Rouge::Lexers::PlainText
+    Rouge::Lexer.find_fancy(lang) || Rouge::Lexers::PlainText
   end
 
   LEADING_OR_TRAILING_LINE_TERMINATORS = %r{\A(\n|\r)+|(\n|\r)+\z}
-  def content
+  def parse_content(tag)
     tag.content.gsub(LEADING_OR_TRAILING_LINE_TERMINATORS, "")
   end
 
