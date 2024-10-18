@@ -3,8 +3,25 @@ permalink: /404.html
 layout: default
 ---
 
-<h1>404</h1>
+<div class="py-4 bg-grenadier-50">
+  <div class="container max-w-screen-lg">
+    <h2 class="text-4xl py-4 font-medium">
+      404
+    </h2>
+    <p>
+      That page could not be found. <a href="/" class="underline">Return home</a>, or browse by tag:
+    </p>
 
-<h2>Page Not Found :(</h2>
-
-<p>The requested page could not be found.</p>
+    <p>
+    <ul class="flex flex-wrap justify-start my-6">
+      {% for tag in site.tags %}
+      <li class="rounded-md bg-grenadier-200 px-2 py-1 mb-3 me-3 text-zinc-700">
+        <a href="{{ "/tags/" | append: tag[0] | relative_url }}" rel="tag">
+          {{ tag[0] }} ({{ tag[1].size }})
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    </p>
+   </div>
+</div>
