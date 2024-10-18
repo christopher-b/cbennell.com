@@ -20,7 +20,11 @@
 url: "https://cbennell.com" # the base hostname & protocol for your site, e.g. https://example.com
 
 permalink: pretty
-template_engine: erb
+template_engine: liquid
+
+collections:
+  posts:
+    permalink: /posts/:slug/
 
 # Other options you might want to investigate:
 #
