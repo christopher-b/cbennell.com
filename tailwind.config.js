@@ -47,6 +47,13 @@
             '950': '#440f06',
           },
         },
+        typography: ({ theme }) => ({
+          grenadier: {
+            css: {
+              '--tw-prose-bullets': '#ff8638'
+            }
+          }
+        }),
       },
     },
     plugins: [
