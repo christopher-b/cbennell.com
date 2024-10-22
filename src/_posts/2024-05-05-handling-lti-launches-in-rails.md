@@ -1,18 +1,16 @@
 ---
-title: "Handling LTI Launches in Rails"
-date: "2024-05-05"
-categories: 
-  - "edtech"
-tags: 
-  - "application-design"
-  - "edtech"
-  - "lti"
-  - "ruby"
-  - "ruby-on-rails"
-coverImage: "AdobeStock_758576428-scaled-1.jpeg"
+title: Handling LTI Launches in Rails
+date: 2024-05-05
+tags:
+  - application-design
+  - edtech
+  - lti
+  - ruby
+  - ruby-on-rails
+coverImage: powder.jpeg
 ---
 
-The article explains how to set up your Rails application as an _LTI Tool Provider_, to handle LTI 1.3 launches from an LMS, including the OCID workflow, user authentication and what to do with the information you get from the LMS.
+This article explains how to set up your Rails application as an _LTI Tool Provider_, to handle LTI 1.3 launches from an LMS, including the OCID workflow, user authentication and what to do with the information you get from the LMS.
 
 If you're reading this, you probably already know what LTI is. If not, here's the [Wikipedia article](https://en.wikipedia.org/wiki/Learning_Tools_Interoperability).
 
@@ -42,20 +40,16 @@ Let's dig in.
 
 Your application will need to respond to a number of requests specific to the OIDC launch process, the first of which is the _Login Initiation_. Let's create a controller to handle the OIDC launch, and our first route. All you RESTful routes purists, avert your eyes.
 
-config/routes.rb
-
-```
+{% code ruby caption="config/routes.rb" %}
 post "/oidc/initiation", to: "oidc#initiation"
-```
+{% endcode %}
 
-app/controllers/oidc\_controller.rb
-
-```
+{% code ruby caption="app/controllers/oidc_controller.rb" %}
 class OIDCController < ApplicationController
   def initiation
   end
 end
-```
+{% endcode %}
 
 The URL for this route is what we will supply in our Developer Key "OpenID Connect Initiation URL" field.
 
@@ -63,9 +57,7 @@ The URL for this route is what we will supply in our Developer Key "OpenID Conne
 
 We now need to craft the redirect back to the LMS. We use a number of parameters from the original request as well as the redirect URL supplied by the LMS out-of-band. We will also use the [openid\_connect gem](https://github.com/nov/openid_connect) to do a bit of the magic for us. Let's create a PORO model to handle the logic of building the URL.
 
-app/models/oidc\_authorization\_url.rb
-
-```
+{% code ruby caption="app/models/oidc_authorization_url.rb" %}
 class OIDCAuthorizationUri
   def initialize(state:, nonce:, login_hint:, lti_message_hint:, tool_id:, redirect_host:)
     @state = state
@@ -109,29 +101,25 @@ class OIDCAuthorizationUri
     }
   end
 end
-```
+{% endcode %}
 
 Let's also add some inflections for all of the initialisms we're working with.
 
-config/initializers/inflections.rb
-
-```
+{% code ruby caption="config/initializers/inflections.rb" %}
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym "LTI"
   inflect.acronym "OIDC"
 end
-```
+{% endcode %}
 
 In the OIDC controller, we can create a new `OIDCAuthorizationURL` and redirect to it. We create a few session variables to help validate the response in the next step.
 
-app/controllers/oidc\_controller.rb
-
-```
+{% code ruby caption="app/controllers/oidc_controller.rb" %}
 def initiation
   set_session_params
   redirect_to auth_uri.to_s, allow_other_host: true
 end
-  
+
 private
 
 def set_session_params
@@ -150,7 +138,7 @@ def auth_uri
     redirect_host: request.hostname
   )
 end
-```
+{% endcode %}
 
 ## Step 3: Authentication Response
 
@@ -160,21 +148,17 @@ It sends along a [JWT](https://jwt.io/introduction/) with a lot of useful inform
 
 Let's add the route and controller action to handle the authentication response.
 
-config/routes.rb
-
-```
+{% code ruby caption="config/routes.rb" %}
 post "/oidc/callback", to: "oidc#callback"
-```
+{% endcode %}
 
-app/controllers/oidc\_controller.rb
-
-```
+{% code ruby caption="app/controllers/oidc_controller.rb" %}
 class OIDCController < ApplicationController
   # ...
   def callback
   end
 end
-```
+{% endcode %}
 
 The response contains a signed JWT in the `id_token` param. This JWT is [chock full of details](https://cbennell.ocaduwebspace.ca/67/whats-in-a-canvas-lms-lti-1-3-jwt/) about the LTI Launch, the launch context (like the course in which the tool was embedded) the user and LMS platform itself.
 
@@ -192,9 +176,7 @@ We have a few hoops to jump through in this step:
 
 Next, we decode the JWT. For that we will need the [public JWKs](https://canvas.instructure.com/doc/api/file.lti_dev_key_config.html#config-in-tool) provided by the LMS. We will also leverage the gem [json-jwt](https://github.com/nov/json-jwt) to do the heavy lifting. Let's build a model to encapsulate that behaviour. This will handle fetching the public JWKs that are used to validate the token, and decoding the value into something useful.
 
-app/models/jwt\_content.rb
-
-```
+{% code ruby caption="app/models/jwt_content.rb" %}
 class JWTContent
   def initialize(id_token_string)
     @id_token_string = id_token_string
@@ -228,15 +210,13 @@ class JWTContent
     }
   end
 end
-```
+{% endcode %}
 
 ### Verify the Token
 
 We also need to perform some verification on the token. The full verification requirements are explained in the [LTI Security Framework](https://www.imsglobal.org/spec/security/v1p0/#authentication-response-validation). We add a `#verify` method to the JWTContent class.
 
-app/model/jwt\_content.rb
-
-```
+{% code ruby caption="app/model/jwt_content.rb" %}
 class JWTContent
   def verify(lms_platform_id:, tool_client_id:, nonce:)
     azp_valid = id_token[:azp] ? (id_token[:azp] == tool_client_id) : true
@@ -253,13 +233,11 @@ class JWTContent
     end
   end
 end
-```
+{% endcode %}
 
 We store and check nonces to prevent replay attacks; here's a simple model to save them in the database. If your application has a cache store, use it instead.
 
-app/models/oauth\_nonce.rb
-
-```
+{% code ruby caption="app/models/oauth_nonce.rb" %}
 class OauthNonce < ApplicationRecord
   validates :nonce, :consumer_key, presence: true
 
@@ -282,11 +260,9 @@ class OauthNonce < ApplicationRecord
     where("created_at < ?", 5.minutes.ago).delete_all
   end
 end
-```
+{% endcode %}
 
-db/migrate/...create\_oauth\_nonces.rb
-
-```
+{% code ruby caption="db/migrate/...create_oauth_nonces.rb" %}
 class CreateOauthNonces < ActiveRecord::Migration[7.0]
   def change
     create_table :oauth_nonces do |t|
@@ -299,31 +275,27 @@ class CreateOauthNonces < ActiveRecord::Migration[7.0]
     add_index :oauth_nonces, :created_at
   end
 end
-```
+{% endcode %}
 
 ### Dealing With the Token Contents
 
 Calling `JWTContent.new(jwt).id_token` will return an hash-like containing fields such as:
 
-Ruby
-
-```
+{% code ruby caption="ruby" %}
 {
-  "https://purl.imsglobal.org/spec/lti/claim/version"=>"1.3.0", 
-  "azp"=>"163950000000000106", 
-  "exp"=>1714746467, 
-  "iat"=>1714742867, 
-  "nonce"=>"0c369dfd1d51c28dc4dd47d3ba164823", 
+  "https://purl.imsglobal.org/spec/lti/claim/version"=>"1.3.0",
+  "azp"=>"163950000000000106",
+  "exp"=>1714746467,
+  "iat"=>1714742867,
+  "nonce"=>"0c369dfd1d51c28dc4dd47d3ba164823",
   "https://purl.imsglobal.org/spec/lti/claim/custom"=>{...}
   ...
 }
-```
+{% endcode %}
 
 We can wrap this content another model to encapsulate the access details.
 
-app/models/lti/launch\_context.rb
-
-```
+{% code ruby caption="app/models/lti/launch_context.rb" %}
 module LTI
   class LaunchContext
     def self.build(payload)
@@ -359,24 +331,22 @@ module LTI
     end
   end
 end
-```
+{% endcode %}
 
 (This example assumes [custom variables](https://canvas.instructure.com/doc/api/file.tools_variable_substitutions.html) configured on the Developer Key)
 
 Developer Key Custom Fields
 
-```
+{% code %}
 user_sis_id=$Canvas.user.sisSourceId
 course_sis_id=$Canvas.course.sisSourceId
-```
+{% endcode %}
 
 There's a lot of info in the JWT. You can extract it all into the LaunchContext object, or only extract the specific fields you need. In this case, I'm extracting details needed for a DeepLinking response. (I'm also turning this model into an ActiveRecord, more on that in a future article)
 
 In our controller, we can use the LaunchContext to get the info we actually want. We create a JWTContent instance to decode the JWT passed from the LMS, and pass _that_ into the LTI::LaunchContext.
 
-app/controllers/oidc\_controller.rb
-
-```
+{% code ruby caption="app/controllers/oidc_controller.rb" %}
 class OIDCController < ApplicationController
   def callback
   end
@@ -398,7 +368,7 @@ class OIDCController < ApplicationController
   def lti_launch_context
     @lti_launch_context ||= LTI::LaunchContext.build(jwt_content)
   end
-  
+
   def cleanup_session_params
     session.delete :state
     session.delete :nonce
@@ -412,13 +382,11 @@ class OIDCController < ApplicationController
     }
   end
 end
-```
+{% endcode %}
 
 Now all that's left is to authenticate the user and redirect.
 
-app/controllers/oidc\_controller.rb
-
-```
+{% code ruby caption="app/controllers/oidc_controller.rb" %}
 class OIDCController < ApplicationController
   def callback
     user_id = lti_launch_context.user_sis_id
@@ -427,7 +395,7 @@ class OIDCController < ApplicationController
     redirect_to lti_launch_context.target_link_uri
   end
 end
-```
+{% endcode %}
 
 ## Conclusion
 
