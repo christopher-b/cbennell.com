@@ -34,6 +34,10 @@ pre.highlight, figure.highlight {
   padding: 16px;
 }
 
+figure.highlight {
+  margin-bottom: 1.75rem;
+}
+
 .highlight figcaption {
   font-style: italic;
 }
