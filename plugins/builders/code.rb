@@ -31,25 +31,27 @@ class Builders::Code < SiteBuilder
     tag.content.gsub(LEADING_OR_TRAILING_LINE_TERMINATORS, "")
   end
 
-  OPTIONS_REGEX = %r{(?:\w+="[^"]*"|\w+=\S+|\w+)}
   def parse_options(input)
     options = {}
-    return options if input.empty?
 
-    lang = input.split.shift
-    input = input.sub(lang, "").strip
-    options[:lang] = lang
+    # Use regex to split by spaces, but keep quoted strings together
+    parts = input.scan(/(?:\w+="[^"]*"|\w+=\w+|\w+)/)
 
-    # Split along 3 possible forms -- key="<quoted list>", key=value, or key
-    input.scan(OPTIONS_REGEX) do |opt|
-      key, value = opt.split("=")
-      # If a quoted list, convert to array
-      if value&.include?('"')
-        value.delete!('"')
-        value = value.split
-      end
-      options[key.to_sym] = value || true
+    # If the first part does not contain an equals sign, treat it as the "lang"
+    if parts.first && !parts.first.include?("=")
+      options[:lang] = parts.shift
     end
+
+    parts.each do |part|
+      if part.include?("=")
+        key, value = part.split("=", 2)
+        value = value.tr('"', "") # Remove any surrounding quotes
+        options[key.to_sym] = value
+      else
+        options[part.to_sym] = true # Treat standalone words as true
+      end
+    end
+
     options
   end
 
