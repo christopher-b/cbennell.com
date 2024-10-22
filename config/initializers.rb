@@ -60,4 +60,22 @@ Bridgetown.configure do |config|
 
   # For more documentation on how to configure your site using this initializers file,
   # visit: https://edge.bridgetownrb.com/docs/configuration/initializers/
+
+  url "https://cbennell.com"
+
+  permalink "pretty"
+
+  template_engine "liquid"
+
+  timezone "America/Toronto"
+
+  fast_refresh false
+
+  config.pagination = {enabled: true}
+
+  config.collections = {
+    posts: {
+      permalink: "/posts/:slug/"
+    }
+  }
 end
