@@ -20,9 +20,9 @@ layout: default
       </p>
 
       <!--Tags-->
-      <ul class="flex justify-center space-x-3 py-6">
+      <ul class="flex justify-center flex-wrap py-6">
         {% for tag in resource.data.tags %}
-          <li class="rounded-md bg-grenadier-200 px-2 py-1 text-zinc-700">
+          <li class="rounded-md bg-grenadier-200 px-2 py-1 me-3 mb-3 text-zinc-700">
             <a href="/tags/{{ tag }}" rel="tag">{{tag}}</a>
           </li>
         {% endfor %}
