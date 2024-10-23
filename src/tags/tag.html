@@ -10,16 +10,28 @@ prototype:
 <div class="py-4 bg-grenadier-50">
   <div class="container max-w-screen-lg">
 
+    <!-- Title -->
     <h2 class="text-4xl py-4 font-medium">
-      Articles tagged <span class="italic">{{ page.data.tag }}</span>
+      Tag: <span class="italic">{{ page.data.tag }}</span>
     </h2>
 
-    <ul class="divide-y divide-zinc-400">
+    <ul class="md:grid grid-cols-3 gap-6">
       {% for post in paginator.resources %}
       <li class="py-3">
-        <a class="text-lg leading-tight hover:underline" href="{{ post.relative_url }}">{{ post.data.title }}</a>
+        <a class="text-lg leading-tight hover:underline" href="{{ post.relative_url }}">
+          <figure class="md:aspect-square mb-4">
+            <img class="rounded-xl w-full h-full object-cover" src="{{ '/images/cover/' | append: post.data.coverImage | relative_url }}" alt="" role="presentation" />
+          </figure>
+
+          <p class="text-xl">
+            {{ post.data.title }}
+          </p>
+        </a>
         <p class="pt-2 text-sm">
-        <time class="text-grenadier-700" datetime="{{post.data.date}}">{{post.data.date | date: "%B %e, %Y" }}</time>
+          <time class="text-grenadier-700" datetime="{{post.data.date}}">{{post.data.date | date: "%B %e, %Y" }}</time>
+        </p>
+        <p class="pt-2 text-sm">
+          {{ post.summary }}
         </p>
       </li>
       {% endfor %}
