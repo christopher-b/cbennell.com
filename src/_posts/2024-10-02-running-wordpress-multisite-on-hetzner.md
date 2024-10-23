@@ -1,12 +1,11 @@
 ---
-title: "Running WordPress Multisite on Hetzner with Custom Domains"
-date: "2024-10-02"
-categories:
-  - "wordpress"
+title: Running WordPress Multisite on Hetzner with Custom Domains
+date: 2024-10-02
 tags:
-  - "diy"
-  - "hetzner"
-coverImage: "swans.jpeg"
+  - wordpress
+  - diy
+  - hetzner
+coverImage: swans.jpeg
 ---
 
 I've been using Ionos webhosting for 17 years, dating back to when it was still **1and1**. In 2007, the service offered a good mix of features and affordability. However, over the years it has become bloated with unnecessary tools, and the price has skyrocketed. It was time to switch.
@@ -23,28 +22,24 @@ Next, I took some basic security measures by requiring SSH key authentication an
 
 The UFW setup involved:
 
-UFW
-
-```
+{% code bash %}
 ufw default deny incoming  # Block all incoming traffic by default
 ufw allow OpenSSH          # Allow SSH connections
 ufw allow https            # Allow secure HTTPS traffic
 ufw allow http             # Allow HTTP traffic for Let's Encrypt
 ufw enable                 # Enable the firewall
-```
+{% endcode %}
 
 The server image includes `unattended-upgrades`, but I made a few adjustments to `/etc/apt/apt.conf.d/50unattended-upgrades` to automatically remove unused dependencies and email me on errors.
 
 Quite a few packages needed updates, so I ran my go-to commands:
 
-Bash
-
-```
+{% code bash %}
 apt update
 apt upgrade
 apt autoremove
 reboot
-```
+{% endcode %}
 
 And a reboot at the end to apply kernel updates. I also signed up for [Canonical's LivePatch](https://auth.livepatch.canonical.com/) service to keep the kernel updated without reboots.
 

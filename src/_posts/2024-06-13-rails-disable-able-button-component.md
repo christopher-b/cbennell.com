@@ -1,15 +1,13 @@
 ---
-title: "Rails \"Disable-able\" button component"
-date: "2024-06-13"
-categories: 
-  - "ruby"
-tags: 
-  - "ruby"
-  - "ruby-on-rails"
-  - "stimulus"
-  - "ui"
-  - "viewcomponent"
-coverImage: "AdobeStock_797945701-scaled-1.jpeg"
+title: Rails "Disable-able" button component
+date: 2024-06-13
+tags:
+  - ruby
+  - ruby-on-rails
+  - stimulus
+  - ui
+  - viewcomponent
+coverImage: wires.jpeg
 ---
 
 Here's a simple ViewComponent/Stimulus controller for a disable-able button; that is, a button that you can programmatically disable/enable. You could use this to prevent form submission until all fields are valid.
@@ -20,9 +18,7 @@ If anyone has a better name for this component, please let me know!
 
 Pretty simple: we render a button in a span, passing along some tag options from the component class.
 
-app/components/ui/disableable\_button.html.erb
-
-```
+{% code erb caption="app/components/ui/disableable_button.html.erb" %}
 <%=
   tag.span(**container_options) do
     tag.button(**button_options) do
@@ -30,15 +26,13 @@ app/components/ui/disableable\_button.html.erb
     end
   end
 %>
-```
+{% endcode %}
 
 ## The Component
 
 The component itself has a few things going on.
 
-app/components/ui/disableable\_button.rb
-
-```
+{% code ruby caption="app/components/ui/disableable_button.rb" %}
 module UI
   class DisableableButton < ApplicationComponent
     attr_reader :button_options, :container_options
@@ -78,13 +72,11 @@ module UI
     end
   end
 end
-```
+{% endcode %}
 
 Let's go over the initializer params:
 
-app/components/ui/disableable\_button.rb
-
-```
+{% code ruby caption="app/components/ui/disableable_button.rb" %}
 def initialize(
   disabled: false,
   disable_events: [],
@@ -93,17 +85,17 @@ def initialize(
   variant: "light",
   tag_options: {}
 )
-```
+{% endcode %}
 
 - disabled: set the default state of the button.
 
-- disable\_events/enable\_events: a list of events that the component will respond to, which control the state of the button.
+- disable_events/enable_events: a list of events that the component will respond to, which control the state of the button.
 
-- disabled\_tooltip: popover text that will appear when hovering over the disabled button. Note that this requires another Stimulus controller ("tooltip") to work.
+- disabled_tooltip: popover text that will appear when hovering over the disabled button. Note that this requires another Stimulus controller ("tooltip") to work.
 
 - variant: passed along as a CSS class to the button. This allows us to set a default variant that can be overridden if required.
 
-- tag\_options: additional options that can be passed along to the button tag. Allows arbitrary customization of the button tag.
+- tag_options: additional options that can be passed along to the button tag. Allows arbitrary customization of the button tag.
 
 * * *
 
@@ -111,9 +103,7 @@ We then create the container options hash, which is used to create the container
 
 We also indicate the stimulus controllers to use ("disableable-button" and "tooltip") and build a list of event listeners, which are flattened into a single string.
 
-app/components/ui/disableable\_button.rb
-
-```
+{% code ruby caption="app/components/ui/disableable_button.rb" %}
 container_options = {
   tabindex: 0,
   title: disabled_tooltip,
@@ -127,15 +117,13 @@ container_options = {
     ].flatten.join(" ")
   }
 }
-```
+{% endcode %}
 
 * * *
 
 Finally, we set some parameters for the button itself, include indicating that it is the "target" that will be used by the Stimulus controller.
 
-app/components/ui/disableable\_button.rb
-
-```
+{% code ruby caption="app/components/ui/disableable_button.rb" %}
 button_options = {
   disabled: disabled,
   class: %W[btn btn-#{variant}],
@@ -143,15 +131,13 @@ button_options = {
     "disableable-button-target": "button"
   }
 }
-```
+{% endcode %}
 
 ## Speaking of the Stimulus Controller...
 
 ...it's dead simple. It has two methods that set or remove the "disabled" attribute on the button.
 
-app/javascript/controllers/disableable\_button\_controller.js
-
-```
+{% code js caption="app/javascript/controllers/disableable_button_controller.js" %}
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
@@ -165,15 +151,13 @@ export default class extends Controller {
     this.buttonTarget.setAttribute("disabled", "disabled")
   }
 }
-```
+{% endcode %}
 
 ## That's it!
 
 Now we render the button.
 
-ERB
-
-```
+{% code erb %}
 <%= render UI::DisableableButton.new(
   variant: "primary",
   disabled: true,
@@ -188,4 +172,4 @@ ERB
   <%= render UI::Icon.new("submit") %>
   Submit Grades
 <% end %>
-```
+{% endcode %}

@@ -1,12 +1,11 @@
 ---
-title: "Default, Dynamic Slot Content in Rails ViewComponents"
-date: "2024-09-25"
-categories:
-  - "dev"
+title: Default, Dynamic Slot Content in Rails ViewComponents
+date: 2024-09-25
 tags:
-  - "ruby-on-rails"
-  - "viewcomponent"
-coverImage: "AdobeStock_308250313-scaled-1.jpeg"
+  - dev
+  - ruby-on-rails
+  - viewcomponent
+coverImage: pebbles.jpeg
 ---
 
 Have you ever wanted to have a default value for a [ViewComponent slot](https://viewcomponent.org/guide/slots.html), or to make the default value dynamic?
@@ -18,7 +17,7 @@ This solution made rendering a spinner icon very concise; I don't need to includ
 
 Here's the component template.
 
-{% code erb caption=app/components/ui/alert.html.erb %}
+{% code erb caption="app/components/ui/alert.html.erb" %}
 <div class="alert alrt-<%= @type %>" role="alert">
   <span class="alert-icon">
     <%= icon %>
@@ -32,9 +31,7 @@ Here's the component template.
 
 And the component class. If the icon slot has not been explicitly filled, we set it to a dynamic default.
 
-app/components/ui/alert.rb
-
-```
+{% code ruby caption="app/components/ui/alert.rb"%}
 module Ui
   class Alert < ApplicationComponent
     renders_one :icon, types: {
@@ -70,38 +67,32 @@ module Ui
     end
   end
 end
-```
+{% endcode %}
 
 We can render an alert like so, to have the default icon for the alert variant.
 
-ERB
-
-```
+{% code erb %}
 <%# Renders the success "check" icon %>
 <%= render Ui::Alert.new(:success) do %>
   Content...
 <% end %>
-```
+{% endcode %}
 
 Or with a spinner.
 
-ERB
-
-```
+{% code erb %}
 <%= render Ui::Alert.new(:secondary) do |alert| %>
   <% alert.with_icon_spinner %>
     Content...
 <% end %>
-```
+{% endcode %}
 
 Or with an any icon we like, using the awkwardly named `.with_icon_icon`!
 
-ERB
-
-```
+{% code erb %}
 <%= render Ui::Alert.new(:secondary) do |alert| %>
   <% alert.with_icon_icon("search") %>
 <% end %>
-```
+{% endcode %}
 
 I love discovering the flexibility and power of ViewComponents. I often feel like I'm just scratching the surface of the capabilities.
