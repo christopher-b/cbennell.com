@@ -11,6 +11,7 @@ coverImage: powder.jpeg
 ---
 
 This article explains how to set up your Rails application as an _LTI Tool Provider_, to handle LTI 1.3 launches from an LMS, including the OCID workflow, user authentication and what to do with the information you get from the LMS.
+{: .lead }
 
 If you're reading this, you probably already know what LTI is. If not, here's the [Wikipedia article](https://en.wikipedia.org/wiki/Learning_Tools_Interoperability).
 

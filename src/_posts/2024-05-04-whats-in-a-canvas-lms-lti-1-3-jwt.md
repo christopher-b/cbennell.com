@@ -7,7 +7,8 @@ tags:
 coverImage: blue_paint.jpeg
 ---
 
-As a precursor to more in-depth articles about handling LTI 1.3 launches ([here]({{ "posts/handling-lti-launches-in-rails/" | relative_url }}) and [here]({{ "posts/building-an-lti-deeplinking-response-in-rails/" | relative_url }})) in Ruby on Rails, I wanted to explore the contents of an LTI JWT. Receiving and decoding the JWT is part of step three of the four-step process of handling an LTI launch. My [other article]({{ "posts/handling-lti-launches-in-rails/" | relative_url }}) will cover those steps in more detail, but I will point out that most of the work is being done by the [json-jwt](https://github.com/nov/json-jwt) gem.
+As a precursor to more in-depth articles about handling LTI 1.3 launches ([here]({{ "posts/handling-lti-launches-in-rails/" | relative_url }}) and [here]({{ "posts/building-an-lti-deeplinking-response-in-rails/" | relative_url }})) in Ruby on Rails, I wanted to explore the contents of an LTI JWT. Receiving and decoding the JWT is part of step three of the four-step process of handling an LTI launch. My [other article]({{ "posts/handling-lti-launches-in-rails/" | relative_url }}) will cover those steps in more detail (altough most of the work is being done by the [json-jwt](https://github.com/nov/json-jwt) gem).
+{: .lead }
 
 A JSON Web Token is a chunk of JSON that has been **signed** and **encrypted**. **Signed** means that we can trust the token content, and **encrypted** means that no one else can read it. JWTs allow applications to securely pass around data, structured as JSON objects. The [LTI Security Framework](https://www.imsglobal.org/spec/security/v1p0/#authentication-response-validation) specifies using OIDC + JWTs as one possible pattern for secure communication.
 

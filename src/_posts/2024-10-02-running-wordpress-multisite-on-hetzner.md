@@ -9,6 +9,7 @@ coverImage: swans.jpeg
 ---
 
 I've been using Ionos webhosting for 17 years, dating back to when it was still **1and1**. In 2007, the service offered a good mix of features and affordability. However, over the years it has become bloated with unnecessary tools, and the price has skyrocketed. It was time to switch.
+{: .lead }
 
 Currently, I need simple WordPress hosting for a handful of sites. Commercial WordPress hosting is a bit more expensive than I was hoping, considering how easy it is to do yourself. I though "Hey, I know how to do this stuff!"
 

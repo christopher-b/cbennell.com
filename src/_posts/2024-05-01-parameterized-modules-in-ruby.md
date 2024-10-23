@@ -7,6 +7,7 @@ coverImage: squares.jpeg
 ---
 
 Reading the documentation for some [dry-rb](https://dry-rb.org/) projects, like [dry-](https://dry-rb.org/gems/dry-container/0.11/)[auto\_inject](https://dry-rb.org/gems/dry-auto_inject/1.0/), I was intrigued by the syntax in examples like this:
+{: .lead }
 
 {% code ruby %}
 class CreateUser

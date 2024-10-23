@@ -11,6 +11,7 @@ coverImage: wires.jpeg
 ---
 
 Here's a simple ViewComponent/Stimulus controller for a disable-able button; that is, a button that you can programmatically disable/enable. You could use this to prevent form submission until all fields are valid.
+{: .lead }
 
 If anyone has a better name for this component, please let me know!
 

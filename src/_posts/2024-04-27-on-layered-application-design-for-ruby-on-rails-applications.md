@@ -10,6 +10,7 @@ coverImage: contours.jpeg
 ---
 
 _[Layered Design for Ruby on Rails Applications](https://www.packtpub.com/product/layered-design-for-ruby-on-rails-applications/9781801813785)_ (By Vladimir Dementyev, published by Packt August 2023) discusses advanced topics in Ruby on Rails application design. The core of the book, as can be gathered from the title, is the concept of _layers_. Dementyev actually uses _layer_ in two different ways:
+{: .lead }
 
 ## Architectural Layers
 

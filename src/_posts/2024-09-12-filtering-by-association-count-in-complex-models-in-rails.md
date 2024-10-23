@@ -8,9 +8,10 @@ tags:
 coverImage: pegs.jpeg
 ---
 
-I recently tried to optimize a slow page, and bumped into some limitations in the way Rails works with complex associations. The models I'm working with are `Courses`, `Users`, and `Enrollments`. There is a many-to-many relationship between `Courses` and `Users`, with `Enrollments` acting as the join model. Enrollments also have a `role`, indicating if the user is a student, a teacher, etc. I’ve implemented some unconventional `has_many` relationships, which I may explain in a future post.
+I recently tried to optimize a slow page, and bumped into some limitations in the way Rails works with complex associations.
+{: .lead }
 
-
+The models I'm working with are `Courses`, `Users`, and `Enrollments`. There is a many-to-many relationship between `Courses` and `Users`, with `Enrollments` acting as the join model. Enrollments also have a `role`, indicating if the user is a student, a teacher, etc. I’ve implemented some unconventional `has_many` relationships, which I may explain in a future post.
 
 {% code ruby caption="app/models/course.rb" %}
 class Course < ApplicationRecord
@@ -23,16 +24,12 @@ class Course < ApplicationRecord
 end
 {% endcode %}
 
-
-
 {% code ruby caption="app/models/user.rb" %}
 class User < ApplicationRecord
   has_many :enrollments
   has_many :courses, through: :enrollments, inverse_of: :user
 end
 {% endcode %}
-
-
 
 {% code ruby caption="app/models/enrollment.rb" %}
 class Enrollment < ApplicationRecord
@@ -100,8 +97,6 @@ WHERE student_count > 0
 I'm not an SQL expert; it's possible that a JOIN could be faster.
 
 Now, how to express that in my Rails models? It turns out that scopes work nicely for this. I settled on using two scopes to express the two different elements of this query: computing the `student_count` and filtering for courses with students. This makes the code a bit more clear and would allow me to reuse the student count in other contexts.
-
-
 
 {% code ruby caption="app/models/course.rb" %}
 class Course < ApplicationRecord

@@ -10,6 +10,7 @@ coverImage: crystals.jpeg
 ---
 
 Here's a technique I use when I want to wrap an API response in a simple class, rather than use a raw hash result. It allows easier access to the object properties, and allows you to attach some instance methods, with a minimal amount of boilerplate.
+{: .lead }
 
 This is helpful if I want to access the member data using dot notation, rather than index keys.
 
