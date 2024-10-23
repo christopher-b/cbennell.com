@@ -14,7 +14,7 @@ class Builders::Code < SiteBuilder
 
   def build_formatter(options)
     formatter = Rouge::Formatters::HTML.new
-    formatter = Rouge::Formatters::HTMLLineHighlighter.new(formatter, highlight_lines: options[:lines]&.map(&:to_i))
+    formatter = Rouge::Formatters::HTMLLineHighlighter.new(formatter, highlight_lines: options[:highlight]&.map(&:to_i))
     formatter = ChompFormatter.new(formatter)
     formatter = Rouge::Formatters::HTMLTable.new(formatter, gutter_class: "gutter", code_class: "code")
     formatter = WrappingFormatter.new(formatter, caption: options[:caption])
@@ -34,8 +34,8 @@ class Builders::Code < SiteBuilder
   def parse_options(input)
     options = {}
 
-    # Use regex to split by spaces, but keep quoted strings together
-    parts = input.scan(/(?:\w+="[^"]*"|\w+=\w+|\w+)/)
+    # Use regex to split by spaces, but keep quoted strings and arrays together
+    parts = input.scan(/(?:\w+="[^"]*"|\w+=\[[^\]]*\]|\w+=\w+|\w+)/)
 
     # If the first part does not contain an equals sign, treat it as the "lang"
     if parts.first && !parts.first.include?("=")
@@ -45,7 +45,15 @@ class Builders::Code < SiteBuilder
     parts.each do |part|
       if part.include?("=")
         key, value = part.split("=", 2)
-        value = value.tr('"', "") # Remove any surrounding quotes
+
+        # Handle quoted values by removing surrounding quotes
+        if value.start_with?('"')
+          value = value.tr('"', "")
+          # Handle array values like [1,3,,5-9]
+        elsif value.start_with?("[")
+          value = parse_array(value)
+        end
+
         options[key.to_sym] = value
       else
         options[part.to_sym] = true # Treat standalone words as true
@@ -53,6 +61,23 @@ class Builders::Code < SiteBuilder
     end
 
     options
+  end
+
+  def parse_array(value)
+    value = value.tr('[]', '') # Remove surrounding brackets
+    elements = value.split(',') # Split by commas
+
+    result = []
+    elements.each do |element|
+      if element.include?('-') # Handle ranges like 5-9
+        start_range, end_range = element.split('-').map(&:to_i)
+        result.concat((start_range..end_range).to_a)
+      elsif !element.empty?
+        result << element.to_i # Add individual numbers
+      end
+    end
+
+    result
   end
 
   class WrappingFormatter < Rouge::Formatters::HTML

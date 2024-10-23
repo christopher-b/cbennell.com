@@ -98,7 +98,7 @@ I'm not an SQL expert; it's possible that a JOIN could be faster.
 
 Now, how to express that in my Rails models? It turns out that scopes work nicely for this. I settled on using two scopes to express the two different elements of this query: computing the `student_count` and filtering for courses with students. This makes the code a bit more clear and would allow me to reuse the student count in other contexts.
 
-{% code ruby caption="app/models/course.rb" %}
+{% code ruby caption="app/models/course.rb" highlight=[9-15] %}
 class Course < ApplicationRecord
   has_many :enrollments
   has_many :teacher_enrollments, -> { teacher.eager_load(:user) }, class_name: "Enrollment"
@@ -109,7 +109,10 @@ class Course < ApplicationRecord
 
   # Adding scopes to filter courses by student count
   scope :with_student_count, -> {
-    select("courses.*, (select count(*) from enrollments where enrollments.course_id = courses.id and enrollments.role = 'student') as student_count")
+    select("
+      courses.*, (select count(*)
+      from enrollments
+      where enrollments.course_id = courses.id and enrollments.role = 'student') as student_count")
   }
   scope :has_students, -> { with_student_count.where("student_count > ?", 0) }
 end
@@ -117,7 +120,7 @@ end
 
 Now we can use the `has_students` scope in our original query:
 
-{% code ruby %}
+{% code ruby highlight=[2] %}
 Course
   .has_students
   .includes(:teachers)

@@ -47,7 +47,7 @@ I'm serializing the `custom` field because I want some flexibility to add custom
 
 
 
-{% code ruby caption="app/models/lti/launch_context.rb" %}
+{% code ruby caption="app/models/lti/launch_context.rb" highlight=[15] %}
 module LTI
   class LaunchContext < ApplicationRecord
     serialize :custom, JSON
@@ -122,7 +122,7 @@ As a reminder, we instantiate this object from our `OIDCController`. Additionall
 
 app
 
-{% code ruby caption="/controllers/oidc_controller.rb" %}
+{% code ruby caption="/controllers/oidc_controller.rb" highlight=[3,21-23] %}
 class OIDCController < ApplicationController
   def callback
     session[:lti_launch_context_id] = lti_launch_context.id
@@ -176,7 +176,7 @@ Let's break down some of the steps we will be following:
 
 We give ourselves access to the `LaunchContext` that we've saved in the session.
 
-{% code ruby caption="app/controllers/tools_controller.rb" %}
+{% code ruby caption="app/controllers/tools_controller.rb" highlight=[28-33] %}
 class ToolController < ApplicationController
   before_action :set_tool
 
@@ -295,7 +295,7 @@ end
 
 Back to `ToolsController`. Let's create a `ResponseContext` and pass it into a `DeepLinkResponseFormComponent`.
 
-{% code ruby caption="app/controllers/tools_controller.rb" %}
+{% code ruby caption="app/controllers/tools_controller.rb" highlight=[36,47-58] %}
 class ToolController < ApplicationController
   before_action :set_tool
   before_action :set_response_form, only: [:edit]
@@ -358,7 +358,7 @@ end
 
 Now our `DeepLinkResponseFormComponent` has everything it needs to render itself properly. Let's tell it how to fetch the response HTML.
 
-{% code ruby caption="app/component/deep_link_response_form_component.rb" %}
+{% code ruby caption="app/component/deep_link_response_form_component.rb" highlight=[6,10-12] %}
 class DeepLinkResponseFormComponent < ApplicationComponent
   attr_accessor :return_url
 
@@ -376,7 +376,7 @@ end
 
 And finally, we can prepare the encoded response. The LMS is expecting a JWT, so we rely, once again, on the [json-jwt](https://github.com/nov/json-jwt) gem to do this for us, using some details from the initial LMS launch.
 
-{% code ruby caption="app/component/deep_link_response_form_component.rb" %}
+{% code ruby caption="app/component/deep_link_response_form_component.rb" highlight=[10-27] %}
 class DeepLinkResponseFormComponent < ApplicationComponent
   attr_accessor :return_url
 
@@ -451,7 +451,7 @@ We also add a button to submit the response form.
 <% end %>
 {% endcode %}
 
-{% code ruby caption="app/controllers/tools_controller.rb" %}
+{% code ruby caption="app/controllers/tools_controller.rb" highlight=[6] %}
 class ToolController < ApplicationController
   def update
     respond_to do |format|
@@ -468,7 +468,7 @@ end
 
 We also add a button to submit the response form. This can get a bit awkward depending on how you do your layout. Rails doesn't like to render a form within a form (fair) so we create a submit button for the response form that explicitly targets that form using the `form` html attribute. We can stick that button anywhere, even within a different form, and it will always submit the response form itself.
 
-{% code erb caption="app/views/tools/edit.html.erb" %}
+{% code erb caption="app/views/tools/edit.html.erb" highlight=[3] %}
 <%= form_with(model: @tool, url: tool_path) do |form| %>
   <!-- Edit the Tool -->
   <input type=submit value=Export to LMS form=deep_link_reponse_form>

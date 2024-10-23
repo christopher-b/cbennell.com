@@ -62,10 +62,10 @@ Enabling WordPress Multisite features is [well-documented](https://learn.wordpre
 
 You can then create new sites with subdirectory URLs:
 
-![Screenshot of WP new site creation with a subdirectory URL](images/wp-screenshot-1-1-1024x455.png)
+![Screenshot of WP new site creation with a subdirectory URL](/images/content/wp-screenshot-1.png)
 
 Next, edit the site settings to change the URL to the new domain. Easy!
 
-![Screenshot of the wordpress site settings, showing the URL has been edited to a complete, new domain](images/wp-screenshot-2-1024x693.png)
+![Screenshot of the wordpress site settings, showing the URL has been edited to a complete, new domain](/images/content/wp-screenshot-2.png)
 
 Overall, the process was easier than expected, and I’m pleased with the added control over my hosting setup. Best of all, it’s about a quarter of the cost of Ionos.
