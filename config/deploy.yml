@@ -4,8 +4,8 @@ servers:
   web:
     - 65.21.185.202
 proxy:
-  ssl: true
-  host: cbennell.com
+  ssl: false
+  host: static.cbennell.com
   app_port: 8043
 registry:
   # Specify the registry server, if you're not using Docker Hub

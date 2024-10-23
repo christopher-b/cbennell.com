@@ -61,7 +61,7 @@ Bridgetown.configure do |config|
   # For more documentation on how to configure your site using this initializers file,
   # visit: https://edge.bridgetownrb.com/docs/configuration/initializers/
 
-  url "https://cbennell.com"
+  url "https://static.cbennell.com"
 
   permalink "pretty"
 
