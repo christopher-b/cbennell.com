@@ -13,13 +13,15 @@ tags:
 coverImage: leaves.jpeg
 ---
 
+LTI DeepLinking is an LTI standard which enabled passing content from your LTI Tool back to the LMS. This allows, for example, an RCE editor button placement that will launch your tool and return rich content to be embedded in the editor.
+{: .lead }
+
 _This is part 3 of a 3-part series on LTI Launches. Check out the other articles:_
 
 - [What’s in a Canvas LMS LTI 1.3 JWT?](https://cbennell.ocaduwebspace.ca/67/whats-in-a-canvas-lms-lti-1-3-jwt/)
 - [Handling LTI Launches in Rails](https://cbennell.ocaduwebspace.ca/18/handling-lti-launches-in-rails/)
 
-LTI DeepLinking is an LTI standard which enabled passing content from your LTI Tool back to the LMS. This allows, for example, an RCE editor button placement that will launch your tool and return rich content to be embedded in the editor. According to 1EdTech, DeepLinking's goal is to:
-{: .lead }
+According to 1EdTech, DeepLinking's goal is to:
 
 > \[Reduce\] the time and complexity of setting up an LTI tool link and streamlining the process of adding content from third parties into a Tool Consumer.
 >
