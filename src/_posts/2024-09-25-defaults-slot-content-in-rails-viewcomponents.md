@@ -5,7 +5,7 @@ tags:
   - dev
   - ruby-on-rails
   - viewcomponent
-coverImage: pebbles.jpeg
+coverImage: pebbles.webp
 ---
 
 Have you ever wanted to have a default value for a [ViewComponent slot](https://viewcomponent.org/guide/slots.html), or to make the default value dynamic?

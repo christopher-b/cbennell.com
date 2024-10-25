@@ -10,7 +10,7 @@ tags:
   - lti
   - ruby
   - ruby-on-rails
-coverImage: leaves.jpeg
+coverImage: leaves.webp
 ---
 
 LTI DeepLinking is an LTI standard which enabled passing content from your LTI Tool back to the LMS. This allows, for example, an RCE editor button placement that will launch your tool and return rich content to be embedded in the editor.

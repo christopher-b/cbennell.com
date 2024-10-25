@@ -5,7 +5,7 @@ tags:
   - wordpress
   - diy
   - hetzner
-coverImage: swans.jpeg
+coverImage: swans.webp
 ---
 
 I've been using Ionos webhosting for 17 years, dating back to when it was still **1and1**. In 2007, the service offered a good mix of features and affordability. However, over the years it has become bloated with unnecessary tools, and the price has skyrocketed. It was time to switch.
