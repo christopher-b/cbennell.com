@@ -1,4 +1,3 @@
 # Todo
-- Deploy - kamal, docker, hetzner? GH, Cloudflare?
-- resize images
 - convert to erb
+- Comments: https://cactus.chat/docs/getting-started/quick-start/
