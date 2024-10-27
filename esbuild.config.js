@@ -1,4 +1,5 @@
 const build = require("./config/esbuild.defaults.js")
+const touchFilePlugin = require("./plugins/touch_file.js");
 
 // You can customize this as you wish, perhaps to add new esbuild plugins.
 //
@@ -33,7 +34,7 @@ const build = require("./config/esbuild.defaults.js")
  */
 const esbuildOptions = {
   plugins: [
-    // add new plugins here...
+    touchFilePlugin(["frontend/styles/jit-refresh.css"])
   ],
   globOptions: {
     excludeFilter: /\.(dsd|lit)\.css$/

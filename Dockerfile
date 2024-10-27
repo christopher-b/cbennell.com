@@ -5,8 +5,7 @@ WORKDIR /assets
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-RUN touch frontend/styles/jit-refresh.css
-RUN ./bin/bridgetown frontend:build
+RUN npm run esbuild
 
 # Generate your site content as HTML
 FROM ruby:alpine AS bridgetown_builder
