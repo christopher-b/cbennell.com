@@ -47,7 +47,12 @@ figure.highlight {
   margin-right: 0.75rem;
 }
 
-.highlight .hll { background-color: var(--nord1) }
+.highlight .hll {
+  background-color: var(--nord1);
+  width: 100%;
+  display: block;
+  padding-right: 2em;
+}
 .highlight { background: var(--nord0); color: var(--nord4) }
 .highlight .c { color: var(--nordx); font-style: italic } /* Comment */
 .highlight .err { color: var(--nord11) } /* Error */
