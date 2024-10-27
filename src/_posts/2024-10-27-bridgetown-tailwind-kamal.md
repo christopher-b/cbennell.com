@@ -1,6 +1,6 @@
 ---
 title: Bridgetown, TailwindCSS and Kamal
-date: Sunday, 27 Oct 2024 21:00:13 -0400
+date: Sunday, 27 Oct 2024 09:00:13 -0400
 tags:
   - bridgetown
   - dev
