@@ -4,7 +4,7 @@ This is the static content generator for [cbennell.com](https://cbennell.com), m
 
 This site is powered by [Bridgetown](https://www.bridgetownrb.com/) and [Tailwind CSS](https://tailwindcss.com/), deployed with [Kamal](https://kamal-deploy.org/).
 
-It's mostly a vanilla Bridgetown site, but one point of interest is the custom code block generator.
+It's mostly a vanilla Bridgetown site, but one point of interest is the custom [code block formatter](https://github.com/christopher-b/cbennell.com/blob/main/plugins/builders/code.rb).
 
 ## To Do
 
