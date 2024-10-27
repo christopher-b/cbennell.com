@@ -47,10 +47,16 @@
             '950': '#440f06',
           },
         },
-        typography: ({ theme }) => ({
-          grenadier: {
+        typography: (theme) => ({
+          zinc: {
             css: {
-              '--tw-prose-bullets': '#ff8638'
+              '--tw-prose-bullets': '#d83909'
+            }
+          },
+          DEFAULT: {
+            css: {
+              'code::before': { content: 'none' },
+              'code::after': { content: 'none' },
             }
           }
         }),
