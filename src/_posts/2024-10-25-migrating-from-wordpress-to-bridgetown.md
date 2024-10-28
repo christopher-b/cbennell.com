@@ -24,6 +24,12 @@ And then there’s the [recent Wordpress controversy](https://techcrunch.com/202
 
 I don’t think Wordpress is going anywhere, despite the troubling behaviour of its leadership. I still think it’s a great product and the correct choice for folks who want an easy to use CMS without any web development knowledge. I'm still running WordPress sites for non-technical clients, and I would still recommend it in many cases. But for someone like me, who can handle a few markdown files and some deployment automation, this is better aligned with my principles and how I want to work.
 
+## Tools Used
+
+There are several Wordpress-to-Markdown tools out there. I used [this one](https://github.com/lonekorean/wordpress-export-to-markdown), which worked well for me. It generated the post Markdown files with appropriate file names and good content, and it grabbed all my images. I did need to go though all my posts to fix the front matter and do a general proofread pass. My [Code Block Pro](https://wordpress.org/plugins/code-block-pro/) blocks came out as Markdown code blocks (```). Otherwise, the content migration was very painless.
+
+I'm using [TailwindCSS](https://tailwindcss.com/) as my front-end framework, with the [Typography](https://github.com/tailwindlabs/tailwindcss-typography) plugin. I'm also using [Kamal](https://kamal-deploy.org/) to deploy my site.
+
 ## Why Bridgetown?
 
 I knew I wanted to use a static site generator. I wanted something written in Ruby, so I would feel comfortable extending the tools if needed. I never got into Jekyll during its heyday, and although it’s still actively maintained, I was interested in something more modern and flexible.
