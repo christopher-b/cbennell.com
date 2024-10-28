@@ -8,6 +8,7 @@ It's mostly a vanilla Bridgetown site, but one point of interest is the custom [
 
 ## To Do
 
+ - [ ] Deploy on push
  - [ ] Convert templates / components to ERB
  - [ ] Add commenting: https://cactus.chat/docs/getting-started/quick-start/
 
