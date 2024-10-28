@@ -12,17 +12,25 @@ class Builders::Code < SiteBuilder
     end
   end
 
+  # We don't memoize, as this instance is shared across the site build
   def build_formatter(options)
+    # Basic HTML
     formatter = Rouge::Formatters::HTML.new
+    # Add line highlighting
     formatter = Rouge::Formatters::HTMLLineHighlighter.new(formatter, highlight_lines: options[:highlight]&.map(&:to_i))
+    # Remove newlines added by LineHighlighter
     formatter = ChompFormatter.new(formatter)
+    # The Table formatter gives nice gutters
     formatter = Rouge::Formatters::HTMLTable.new(formatter, gutter_class: "gutter", code_class: "code")
+    # Wrap in our custom code, including adding captions
     formatter = WrappingFormatter.new(formatter, caption: options[:caption])
+
     formatter
   end
 
   def build_lexer(options)
     lang = options[:lang]
+    # @TODO: We should add a "guess" if lang is missing
     Rouge::Lexer.find_fancy(lang) || Rouge::Lexers::PlainText
   end
 
@@ -31,6 +39,11 @@ class Builders::Code < SiteBuilder
     tag.content.gsub(LEADING_OR_TRAILING_LINE_TERMINATORS, "")
   end
 
+  # This allow us to accept options in three forms:
+  #  - the first option, if given as just a keyword, will be treated as the `lang` attribute
+  #  - caption="caption"
+  #  - highlight=[1,2,5-9]
+  #  @TODO extract this to a helper class
   def parse_options(input)
     options = {}
 
@@ -64,13 +77,13 @@ class Builders::Code < SiteBuilder
   end
 
   def parse_array(value)
-    value = value.tr('[]', '') # Remove surrounding brackets
-    elements = value.split(',') # Split by commas
+    value = value.tr("[]", "") # Remove surrounding brackets
+    elements = value.split(",") # Split by commas
 
     result = []
     elements.each do |element|
-      if element.include?('-') # Handle ranges like 5-9
-        start_range, end_range = element.split('-').map(&:to_i)
+      if element.include?("-") # Handle ranges like 5-9
+        start_range, end_range = element.split("-").map(&:to_i)
         result.concat((start_range..end_range).to_a)
       elsif !element.empty?
         result << element.to_i # Add individual numbers
