@@ -1,5 +1,5 @@
 ---
-title: Bridgetown, TailwindCSS and Kamal
+title: "Bridgetown, TailwindCSS and Kamal: A Tricky Deploy Bug"
 date: Sunday, 27 Oct 2024 09:00:13 -0400
 tags:
   - bridgetown
