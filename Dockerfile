@@ -22,4 +22,4 @@ RUN ./bin/bridgetown build
 FROM pierrezemb/gostatic
 COPY --from=bridgetown_builder /app/output /srv/http/
 
-CMD ["-enable-health", "-log-level", "info"]
+CMD ["-enable-health", "-log-level", "info", "-fallback", "404.html"]
