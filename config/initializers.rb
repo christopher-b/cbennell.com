@@ -1,20 +1,7 @@
 Bridgetown.configure do |config|
-  # You can configure aspects of your Bridgetown site here instead of using
-  # `bridgetown.config.yml`. For example:
-  #
-  # permalink "simple"
-  # timezone "America/Los_Angeles"
-  #
   # You can also modify options on the configuration object directly, like so:
-  #
   # config.autoload_paths << "models"
-  #
 
-  # You can configure the inflector used by Zeitwerk. In v2.0,
-  # ActiveSupport::Inflector will become the default.
-  #
-  # config.inflector = ActiveSupport::Inflector
-  #
   # Add new inflection rules using the following format. Inflections
   # are locale specific, and you may define rules for as many different
   # locales as you wish. All of these examples are active by default:
@@ -62,13 +49,9 @@ Bridgetown.configure do |config|
   # visit: https://edge.bridgetownrb.com/docs/configuration/initializers/
 
   url "https://static.cbennell.com"
-
   permalink "pretty"
-
   template_engine "liquid"
-
   timezone "America/Toronto"
-
   fast_refresh false
 
   config.pagination = {enabled: true}
@@ -76,6 +59,9 @@ Bridgetown.configure do |config|
   config.collections = {
     posts: {
       permalink: "/posts/:slug/"
-    }
+    },
+    redirects: {output: true}
   }
+
+  init :"bridgetown-sitemap"
 end

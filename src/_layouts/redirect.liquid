@@ -1,0 +1,11 @@
+---
+layout: default
+---
+<article class="bg-grenadier-50">
+  <div class="container max-w-screen-lg pb-8 pt-8">
+      This page <a class="underline" href="/posts/{{ resource.slug }}">has moved</a>.
+      <script type="text/javascript">
+        window.location.replace(window.location.origin + "/posts/{{ resource.slug }}");
+      </script>
+  </div>
+</article>
