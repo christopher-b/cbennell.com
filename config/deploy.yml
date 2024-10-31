@@ -1,11 +1,12 @@
 service: cbennell_com
 image: christopher-b/cbennell.com
+# require_destination: true
 servers:
   web:
     - 65.21.185.202
 proxy:
   ssl: false
-  host: cbennell.com
+  host: nope.cbennell.com
   app_port: 8043
 registry:
   # Specify the registry server, if you're not using Docker Hub
