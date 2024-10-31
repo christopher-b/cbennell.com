@@ -13,7 +13,7 @@ Here's a simple shell for interacting with [kamal-proxy](https://github.com/base
 #!/bin/bash
 
 #Run the docker exec command with the provided arguments
-docker exec -it kamal-proxy kamal-proxy "$@"
+docker exec kamal-proxy kamal-proxy "$@"
 {% endcode %}
 
 You can now do:
