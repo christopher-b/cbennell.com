@@ -32,7 +32,7 @@
 pre.highlight, figure.highlight {
   font-size: 0.75rem;
   padding: 16px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 figure.highlight {
