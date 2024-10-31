@@ -1,1 +1,3 @@
 # Map main git branch to produciton deploy
+proxy:
+  host: cbennell.com
