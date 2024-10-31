@@ -15,6 +15,10 @@ registry:
     - KAMAL_REGISTRY_PASSWORD
 builder:
   arch: amd64
+  cache:
+    type: gha
+    options: mode=max
+    image: app-build-cache
 env:
   clear:
     BRIDGETOWN_ENV: production
