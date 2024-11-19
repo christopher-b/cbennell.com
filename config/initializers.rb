@@ -52,7 +52,6 @@ Bridgetown.configure do |config|
   permalink "pretty"
   template_engine "liquid"
   timezone "America/Toronto"
-  fast_refresh false
 
   config.pagination = {enabled: true}
 
