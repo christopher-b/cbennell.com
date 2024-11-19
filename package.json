@@ -2,14 +2,15 @@
   "name": "cbennell-bt",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "esbuild": "node esbuild.config.js --minify",
     "esbuild-dev": "node esbuild.config.js --watch"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",
-    "esbuild": "^0.20.2",
-    "glob": "^10.3.3",
+    "esbuild": "^0.24.0",
+    "glob": "^11.0.0",
     "postcss": "^8.4.29",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^15.1.0",

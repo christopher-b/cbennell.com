@@ -1,5 +1,5 @@
-const build = require("./config/esbuild.defaults.js")
-const touchFilePlugin = require("./plugins/touch_file.js");
+import build from "./config/esbuild.defaults.js"
+import touchFilePlugin from "./plugins/touch_file.js";
 
 // You can customize this as you wish, perhaps to add new esbuild plugins.
 //
