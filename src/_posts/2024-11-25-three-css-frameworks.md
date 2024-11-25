@@ -14,7 +14,7 @@ As part of my recent migration from WordPress to Bridgetown, I investigated thre
 ## Open Props
 At one end of the spectrum, [Open Props](https://open-props.style/) relies entirely on CSS custom properties. There are no class name hooks provided, so you're using the framework entirely within your CSS files. You do, of course, need to add class names to your HTML elements so you have some hooks on which to hang the custom. An example:
 
-```
+{% code css caption="Open Props sample" %}
 .card {
   border-radius: var(--radius-2);
   padding: var(--size-fluid-3);
@@ -22,11 +22,11 @@ At one end of the spectrum, [Open Props](https://open-props.style/) relies entir
 }
 
 <div class="card">...</div>
-```
+{% endcode %}
 
 OpenProps can be used with no build process using the CDN, or you can use tools like PostCSS to import only the properties you actually need.
 
-I appreciate how a prebuilt, thoughtful set of [design tokens](https://www.contentful.com/blog/design-token-system/)promotes consistent design and provides a great starting point. OpenProps is just CSS, so you're not mooring yourself to a specific toolchain. The defaults are quite nice, and include some [pretty gradients](https://www.contentful.com/blog/design-token-system/) and [masks](https://open-props.style/#masks).
+I appreciate how a prebuilt, thoughtful set of [design tokens](https://www.contentful.com/blog/design-token-system/) promotes consistent design and provides a great starting point. OpenProps is just CSS, so you're not mooring yourself to a specific toolchain. The defaults are quite nice, and include some [pretty gradients](https://open-props.style/#gradients) and [masks](https://open-props.style/#masks).
 
 The downside to this approach is that you're responsible for naming all your components, and there's a lot of back-and-forth between your markup and your CSS. There are no pre-build components here, so if you're looking for a UI library, this is not it. I did not love the documentation, and I had a hard time figuring out how I was supposed to be using it: the concept is simple, but it's not really laid out anywhere in their documentation. I think they could use a better "Getting Started" section.
 ## Bulma
