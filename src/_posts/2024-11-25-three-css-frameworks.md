@@ -1,3 +1,15 @@
+---
+layout: post
+title:  I Tried Three CSS Frameworks So You Don't Have To
+date:   2024-11-25
+tags:
+  - css
+  - tailwindcss
+  - bulma
+  - open-props
+  - frontend
+---
+
 As part of my recent migration from WordPress to Bridgetown, I investigated three CSS frameworks to build my frontend. I spent some time with each, building out parts of my design. As I investigated, I noticed an interesting pattern emerge: these frameworks can be assessed based on their reliance on utility classes vs CSS rules. The three frameworks I assessed formed a nice range on this continuum.
 ## Open Props
 At one end of the spectrum, [Open Props](https://open-props.style/) relies entirely on CSS custom properties. There are no class name hooks provided, so you're using the framework entirely within your CSS files. You do, of course, need to add class names to your HTML elements so you have some hooks on which to hang the custom. An example:
