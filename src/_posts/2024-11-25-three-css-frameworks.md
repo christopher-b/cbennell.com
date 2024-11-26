@@ -8,6 +8,7 @@ tags:
   - bulma
   - open-props
   - frontend
+coverImage: spatter.webp
 ---
 
 As part of my recent migration from WordPress to Bridgetown, I investigated three CSS frameworks to build my frontend. I spent some time with each, building out parts of my design. As I investigated, I noticed an interesting pattern emerge: these frameworks can be assessed based on their reliance on utility classes vs CSS rules. The three frameworks I assessed formed a nice range on this continuum.
