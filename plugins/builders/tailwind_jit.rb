@@ -1,3 +1,4 @@
+# Consider replacing with https://github.com/bridgetownrb/tailwindcss-automation/issues/4
 class Builders::TailwindJit < SiteBuilder
   def build
     hook :site, :pre_reload do |_, paths|
