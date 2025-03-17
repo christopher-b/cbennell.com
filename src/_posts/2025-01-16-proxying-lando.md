@@ -1,5 +1,6 @@
 ---
 layout: post
+published: false
 title:  Hosting Lando With a Reverse Proxy
 date:   2025-01-16
 tags:
@@ -13,5 +14,6 @@ My workplace recently implemented the concept of Privileged Access Workstations 
 
 # Just Lando
 
+By default, Lando wants to bind to localhost, so it's not available over the network.
 
 # Lando + Nginx
