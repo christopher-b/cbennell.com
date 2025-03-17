@@ -11,7 +11,7 @@ RUN npm run esbuild
 FROM ruby:alpine AS bridgetown_builder
 ENV BRIDGETOWN_ENV=production
 WORKDIR /app
-RUN apk add --no-cache build-base
+RUN apk add --no-cache build-base libyaml
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 COPY . .
