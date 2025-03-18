@@ -1,5 +1,5 @@
 ---
-title: Rails "Disable-able" button component
+title: Rails "Disable-able" Button ViewComponent
 date: 2024-06-13
 tags:
   - ruby
