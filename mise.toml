@@ -1,0 +1,7 @@
+[env]
+# https://mise.jdx.dev/environments/secrets.html
+_.file = ".env.json"
+
+[tasks.deploy]
+description = "Deploy application to production"
+run = "kamal deploy -d main"
