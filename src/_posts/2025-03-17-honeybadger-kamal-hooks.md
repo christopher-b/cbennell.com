@@ -6,11 +6,10 @@ description: "An approach to setting up deploy notifications for your Kamal depl
 tags:
   - kamal
   - honeybadger
-  - rails
 image: images/cover/stars.webp
 ---
 
-I recenlty migrated a Rails app to deploy with [Kamal](https://kamal-deploy.org/) on GitLab CI. I wanted to share a few quirks related to [Honeybadger](https://www.honeybadger.io/) integration. This was mostly an out-of-the-box Kamal configuration, using a Dockerfile similar to what ships with Rails 8.
+I recently migrated a Rails app to deploy with [Kamal](https://kamal-deploy.org/) on GitLab CI. I wanted to share a few quirks related to [Honeybadger](https://www.honeybadger.io/) integration. This was mostly an out-of-the-box Kamal configuration, using a Dockerfile similar to what ships with Rails 8.
 
 ## Reporting Deploys
 

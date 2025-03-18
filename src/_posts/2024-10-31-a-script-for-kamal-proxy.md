@@ -5,6 +5,7 @@ date:   2024-10-31
 tags:
   - kamal
   - shell
+image: images/cover/shell.webp
 ---
 
 Here's a simple shell for interacting with [kamal-proxy](https://github.com/basecamp/kamal-proxy) on your host. It wraps a call to docker-exec, passing the arguments you provide to the kamal-proxy executable in your kamal-proxy container.
