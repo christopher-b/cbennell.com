@@ -5,7 +5,7 @@ title:  Hosting Lando With a Reverse Proxy
 date:   2025-01-16
 tags:
   - lando
-coverImage: spatter.webp
+image: images/cover/spatter.webp
 ---
 
 I'm a big fan of [Lando](https://lando.dev/), the dev tool for building replicatable development environments. I got started with Lando while working on a [Pantheon](https://pantheon.io/)-hosted project, but I've been using it for various projects, including Rails applications via the custom "[lando](https://docs.lando.dev/services/lando-3.html)" service type.

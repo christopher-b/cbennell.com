@@ -6,7 +6,7 @@ tags:
   - application-design
   - books
   - ruby-on-rails
-coverImage: contours.webp
+image: images/cover/contours.webp
 ---
 
 _[Layered Design for Ruby on Rails Applications](https://www.packtpub.com/product/layered-design-for-ruby-on-rails-applications/9781801813785)_ (By Vladimir Dementyev, published by Packt August 2023) discusses advanced topics in Ruby on Rails application design.

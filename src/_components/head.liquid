@@ -1,18 +1,25 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-{% capture resource_title %}{{ title | strip_html | strip_newlines }}{% endcapture %}
-<title>
-  {% if resource_title != "Index" %}
-    {{ resource_title | escape }} | {{ metadata.title | escape }}
-  {% else %}
-    {{ metadata.title | escape }}: {{ metadata.tagline | escape }}
-  {% endif %}
-</title>
-
-<meta name="description" content="{{ metadata.description }}" />
-
 <link rel="stylesheet" href="{% asset_path css %}" />
 <script src="{% asset_path js %}" defer></script>
 {% live_reload_dev_js %}
 <script src="https://kit.fontawesome.com/4d9fabd2c2.js" crossorigin="anonymous"></script>
 <script defer data-domain="cbennell.com" data-api="/api/event" src="https://analytics.cbennell.com/js/script.file-downloads.outbound-links.js"></script>
+{% seo %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Christopher Bennell",
+  "url": "https://cbennell.com/"
+  "author": {
+    "@type": "Person",
+    "name": "Christopher Bennell",
+    "url": "https://cbennell.com",
+    "sameAs": [
+      "https://bsky.app/profile/cbennell.com",
+      "https://www.linkedin.com/in/christopher-bennell/"
+    ]
+  }
+}
+</script>

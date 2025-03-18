@@ -6,7 +6,7 @@ tags:
   - dev
   - kamal
   - tailwind
-coverImage: bridge.webp
+image: images/cover/bridge.webp
 ---
 
 As part of my migration to Bridgetown, I needed a process to deploy my content. [Kamal](https://kamal-deploy.org/), the hot new Ruby deploy tool, was the obvious choice. But I ran into a tricky bug related to the TailwindCSS integration. I'm documenting that bug here for anyone who runs into the same problem.

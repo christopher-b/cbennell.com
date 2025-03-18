@@ -20,7 +20,8 @@ prototype:
       <li class="py-3">
         <a class="text-lg leading-tight hover:underline" href="{{ post.relative_url }}">
           <figure class="md:aspect-square mb-4">
-            <img class="rounded-xl w-full h-full object-cover" src="{{ '/images/cover/' | append: post.data.coverImage | relative_url }}" alt="" role="presentation" />
+            <img class="rounded-xl w-full h-full object-cover" src="{{ post.data.image | relative_url }}" alt=""
+              role="presentation" />
           </figure>
 
           <p class="text-xl">
@@ -37,5 +38,5 @@ prototype:
       {% endfor %}
     </ul>
 
-   </div>
+  </div>
 </div>

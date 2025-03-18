@@ -5,7 +5,7 @@ tags:
   - performance
   - ruby
   - ruby-on-rails
-coverImage: pegs.webp
+image: images/cover/pegs.webp
 ---
 
 I recently tried to optimize a slow page, and bumped into some limitations in the way Rails works with complex associations.

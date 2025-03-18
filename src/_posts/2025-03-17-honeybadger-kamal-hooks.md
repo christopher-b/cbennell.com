@@ -2,11 +2,12 @@
 layout: post
 title:  Honeybadger Deploy Notifications with Kamal Hooks
 date:   2025-03-17
+description: "An approach to setting up deploy notifications for your Kamal deploys"
 tags:
   - kamal
   - honeybadger
   - rails
-coverImage: stars.webp
+image: images/cover/stars.webp
 ---
 
 I recenlty migrated a Rails app to deploy with [Kamal](https://kamal-deploy.org/) on GitLab CI. I wanted to share a few quirks related to [Honeybadger](https://www.honeybadger.io/) integration. This was mostly an out-of-the-box Kamal configuration, using a Dockerfile similar to what ships with Rails 8.

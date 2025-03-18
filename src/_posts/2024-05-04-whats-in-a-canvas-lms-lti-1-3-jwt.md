@@ -4,7 +4,7 @@ date: 2024-05-04
 tags:
   - edtech
   - lti
-coverImage: blue_paint.webp
+image: images/cover/blue_paint.webp
 ---
 
 As a precursor to more in-depth articles about handling LTI 1.3 launches ([here]({{ "posts/handling-lti-launches-in-rails/" | relative_url }}) and [here]({{ "posts/building-an-lti-deeplinking-response-in-rails/" | relative_url }})) in Ruby on Rails, I wanted to explore the contents of an LTI JWT. Receiving and decoding the JWT is part of step three of the four-step process of handling an LTI launch. My [other article]({{ "posts/handling-lti-launches-in-rails/" | relative_url }}) will cover those steps in more detail (altough most of the work is being done by the [json-jwt](https://github.com/nov/json-jwt) gem).

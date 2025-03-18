@@ -7,7 +7,7 @@ tags:
   - stimulus
   - ui
   - viewcomponent
-coverImage: wires.webp
+image: images/cover/wires.webp
 ---
 
 Here's a simple ViewComponent/Stimulus controller for a disable-able button; that is, a button that you can programmatically disable/enable. You could use this to prevent form submission until all fields are valid.

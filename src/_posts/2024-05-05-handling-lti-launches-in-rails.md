@@ -7,7 +7,7 @@ tags:
   - lti
   - ruby
   - ruby-on-rails
-coverImage: powder.webp
+image: images/cover/powder.webp
 ---
 
 This article explains how to set up your Rails application as an _LTI Tool Provider_, to handle LTI 1.3 launches from an LMS, including the OCID workflow, user authentication and what to do with the information you get from the LMS.

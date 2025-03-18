@@ -8,7 +8,7 @@ tags:
   - ssg
   - tailwind
   - wordpress
-coverImage: bridge.webp
+image: images/cover/bridge.webp
 ---
 
 This is my first post after moving my site to a new architecture. After using WordPress for 18 years across various projects—including this site's previous version—I’m migrating to statically generated content with [Bridgetown](https://www.bridgetownrb.com/).
