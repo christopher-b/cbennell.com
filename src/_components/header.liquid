@@ -1,18 +1,24 @@
-<header class="bg-zinc-900 text-neutral-100 py-8">
+<header class="bg-zinc-900 text-neutral-100 py-12">
   <div class="container max-w-screen-lg">
-    <a class="flex flex-col md:flex-row items-center pb-8" href="/" rel="home">
-      <img
+    <div class="flex flex-col md:flex-row items-center">
+      <a href="/" rel="home">
+        <img
         class="rounded-full w-32 border border-zinc-500"
         src="{{ '/images/portrait.jpg' | relative_url }}"
         alt="Portrait of Christopher"
-      />
-      <h1 class="text-4xl md:ps-4">
-        Christopher Bennell
-      </h1>
-    </a>
-    <p class="text-center md:text-left">
-      I’m a full-stack web developer specializing in Ruby on Rails and Education Technology.
-      <a class="underline" href="mailto:cbennell@hey.com">Get in touch</a>.
-    </p>
+        />
+      </a>
+      <div class="md:ps-4">
+        <h1 class="text-4xl">
+          <a href="/" rel="home">
+            Christopher Bennell
+          </a>
+        </h1>
+        <p class="text-center md:text-left">
+        I’m a full-stack web developer specializing in Ruby on Rails and Education Technology.
+        <a class="underline" href="mailto:cbennell@hey.com">Get in touch</a>.
+        </p>
+      </div>
+    </div>
   </div>
 </header>
