@@ -42,11 +42,11 @@ Bulma is in the middle of the "utility-vs-css" spectrum: it offers helper/utilit
 ## TailwindCSS
 Finally, we have [TailwindCSS](https://tailwindcss.com/) coming in at the "all-utility" end of the spectrum. Much has been written about Tailwind's approach, so I won't rehash it.
 
-Like many people, I was sceptical about the idea of cluttering my HTML with big fistfulls of utility classes. My project was a blank slate, and I had a dream clean, unadulterated markup. I didn't want multi-line lists of classes marring that. But here's the thing: you're going to be adding classnames into your project anyways; maybe even extra HTML elements to make your layouts work. Your markup is always going to need concessions to your CSS.
+Like many people, I was sceptical about the idea of cluttering my HTML with big fistfulls of utility classes. My project was a blank slate, and I had a dream of clean, unadulterated markup. I didn't want multi-line lists of classes marring that. But here's the thing: you're going to be adding classnames into your project anyways; maybe even extra HTML elements to make your layouts work. Your markup is always going to need concessions to your CSS.
 
 For a project like mine, where I build the layout once and my day-to-day interactions don't really touch the HTML (Markdown, baby!), this approach makes sense. I can embed a bunch of classes into my markup and never have to open a CSS file. There's no need to name components, and there's no ambiguity about where the styles are defined.
 
-I think this approach would shine in component-based projects, such as those using [Phlex](https://www.phlex.fun/) or [ViewComponent](https://viewcomponent.org/). However, the more often you need to interact with the HTML, the less appealing approach is.
+I think this approach would shine in component-based projects, such as those using [Phlex](https://www.phlex.fun/) or [ViewComponent](https://viewcomponent.org/). However, the more often you need to interact with the HTML, the less appealing this approach is.
 
 ## Wrap Up
 For this project, TailwindCSS proved to be the best fit. It clicked immediately, and I was able to build my design with good velocity. But I recognize that it’s not the right choice for every project.
