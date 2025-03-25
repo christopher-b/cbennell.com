@@ -8,7 +8,7 @@ tags:
 image: images/cover/sediment.webp
 ---
 
-I've recently been wholeheartedly using [Phlex](https://phlex.fun) in a project, and I've been really happy with how easy it is to migrate existing views and components. Phlex has features to cover a lot of the more tricky cases I've come across so far, the straightforward architecture allows me to come up with solutions for cases that Phlex doesn't support out-of-the-box.
+I've been exploring [Phlex](https://phlex.fun) recently, and I've been really happy with how easy it is to migrate existing views and components. Phlex has features to cover a lot of the more tricky cases I've come across so far, the straightforward architecture allows me to come up with solutions for cases that Phlex doesn't support out-of-the-box.
 
 One such case is a [navigation tabs](https://getbootstrap.com/docs/5.0/components/navs-tabs/) component. Inspired by the [Yielding an Interface](https://www.phlex.fun/components/yielding.html#yielding-an-interface) section of the documentation, I came up with an implementation that looked something like this (simplified for clarity):
 
