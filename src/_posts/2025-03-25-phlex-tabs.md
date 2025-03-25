@@ -5,7 +5,7 @@ date:   2025-03-25
 description: ""
 tags:
   - phlex
-image: images/cover/stars.webp
+image: images/cover/sediment.webp
 ---
 
 I've recently been wholeheartedly using [Phlex](https://phlex.fun) in a project, and I've been really happy with how easy it is to migrate existing views and components. Phlex has features to cover a lot of the more tricky cases I've come across so far, the straightforward architecture allows me to come up with solutions for cases that Phlex doesn't support out-of-the-box.
