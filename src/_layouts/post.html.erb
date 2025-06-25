@@ -7,31 +7,31 @@ layout: default
   <div class="container max-w-screen-lg pb-8 pt-8">
     <header class="mb-6">
       <!--Cover image-->
-      <img class="rounded-xl w-full max-w-2xl mx-auto mb-12" src="{{ resource.data.image | relative_url }}" alt="" role="presentation" />
+      <img class="rounded-xl w-full max-w-2xl mx-auto mb-12" src="<%= relative_url resource.data.image %>" alt="" role="presentation" />
 
       <!--Headline-->
-      <h1 class="text-4xl font-medium text-center my-6">{{ data.title }}</h1>
+      <h1 class="text-4xl font-medium text-center my-6"><%= data.title %></h1>
 
       <!--Publish date-->
       <p class="text-center">
-        <time class="text-grenadier-700" datetime="{{resource.data.date}}">
-          {{resource.data.date | date: "%B %d, %Y" }}
+        <time class="text-grenadier-700" datetime="<%= resource.data.date %>">
+          <%= resource.data.date.strftime("%B %d, %Y") %>
         </time>
       </p>
 
       <!--Tags-->
       <ul class="flex justify-center flex-wrap py-6">
-        {% for tag in resource.data.tags %}
+        <% resource.data.tags.each do |tag| %>
           <li class="rounded-md bg-grenadier-200 px-2 py-1 me-3 mb-3 text-zinc-700">
-            <a href="/tags/{{ tag }}" rel="tag">{{tag}}</a>
+            <a href="/tags/<%= tag %>" rel="tag"><%= tag %></a>
           </li>
-        {% endfor %}
+        <% end %>
       </ul>
     </header>
 
     <!--Post content-->
     <div class="prose prose-zinc prose-lg prose-code:text-zinc-700 max-w-screen-lg md:mx-auto">
-      {{ content }}
+      <%= content %>
     </div>
   </div>
 </article>
@@ -42,11 +42,11 @@ layout: default
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "{{resource.absolute_url}}"
+    "@id": "<%= resource.absolute_url %>"
   },
-  "headline": "{{resource.data.title}}",
-  "image": "{{resource.image | absolute_url }}",
-  "datePublished": "{{resource.data.date}}",
+  "headline": "<%= resource.data.title %>",
+  "image": "<%= relative_url resource.data.image %>",
+  "datePublished": "<%= resource.data.date %>",
   "author": {
     "@type": "Person",
     "name": "Christopher Bennell",

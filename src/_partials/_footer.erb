@@ -13,19 +13,30 @@
       <p class="md:w-1/3">
         <img
           class="sepia-[.8] w-full object-cover"
-          src="{{ '/images/beach.jpg' | relative_url }}"
+          src="/images/beach.jpg"
           alt="Christopher on a sunny beach, holding a metal detector, looking for treasure."
         />
       </p>
     </div>
 
     <!--Social-->
+    <%
+      links = [
+        SocialLink.new("https://github.com/christopher-b/", "GitHub", "github.svg"),
+        SocialLink.new("https://www.linkedin.com/in/christopher-bennell/", "LinkedIn", "linkedin.svg"),
+        SocialLink.new("https://bsky.app/profile/cbennell.com", "BlueSky", "bsky.svg"),
+        SocialLink.new("mailto:cbennell@hey.com", "Email", "email.svg"),
+        SocialLink.new("files/christopher_bennell_resume.pdf", "Resume", "file.svg"),
+      ]
+    %>
     <ul class="flex justify-center space-x-5 text-grenadier-200 py-8">
-      <li><a href="https://github.com/christopher-b/" rel="noopener nofollow"><i class="fa-brands fa-github"></i> GitHub</a></li>
-      <li><a href="https://www.linkedin.com/in/christopher-bennell/" rel="noopener nofollow"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
-      <li><a href="mailto:cbennell@hey.com" rel="noopener nofollow"><i class="fa-solid fa-envelope"></i> Email</a></li>
-      <li><a href="{{ "files/christopher_bennell_resume.pdf" | relative_url }}" rel="noopener nofollow"><i class="fa-solid fa-file"></i> Resume</a></li>
+      <% links.each do |link| %>
+        <li>
+          <%= render link %>
+        </li>
+      <% end %>
     </ul>
+
     <p class="text-center text-grenadier-200">
       This site is <a href="https://github.com/christopher-b/cbennell.com" class="underline">open-source</a>.
     </p>

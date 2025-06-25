@@ -48,9 +48,9 @@ Bridgetown.configure do |config|
   # For more documentation on how to configure your site using this initializers file,
   # visit: https://edge.bridgetownrb.com/docs/configuration/initializers/
 
-  url "https://static.cbennell.com"
+  url "https://cbennell.com"
   permalink "pretty"
-  template_engine "liquid"
+  template_engine "liquid" # for posts
   timezone "America/Toronto"
 
   config.pagination = {enabled: true}
@@ -64,4 +64,5 @@ Bridgetown.configure do |config|
 
   init :"bridgetown-sitemap"
   init :"bridgetown-seo-tag"
+  init :"bridgetown-svg-inliner"
 end
