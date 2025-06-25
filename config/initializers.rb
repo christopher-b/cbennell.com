@@ -64,4 +64,5 @@ Bridgetown.configure do |config|
 
   init :"bridgetown-sitemap"
   init :"bridgetown-seo-tag"
+  init :"bridgetown-svg-inliner"
 end
