@@ -9,7 +9,7 @@ It's mostly a vanilla Bridgetown site, but one point of interest is the custom [
 ## To Do
 
  - [X] Deploy on push
- - [ ] Convert templates / components to ERB or Phelx
+ - [X] Convert templates / components to ERB or Phelx
  - [ ] Add commenting: https://cactus.chat/docs/getting-started/quick-start/
 
 ## Commands

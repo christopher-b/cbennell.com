@@ -22,4 +22,6 @@ RUN ./bin/bridgetown build
 FROM pierrezemb/gostatic
 COPY --from=bridgetown_builder /app/output /srv/http/
 
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 CMD curl --fail http://localhost:8043/health || exit 1
+
 CMD ["-enable-health", "-log-level", "info", "-fallback", "404.html"]
